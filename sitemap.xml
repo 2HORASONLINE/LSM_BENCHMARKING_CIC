@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Solo páginas públicas e indexables. REEMPLAZAR dominio-cic.org y actualizar lastmod al publicar.
+     Agregar una entrada por cada plantilla publicada en /recursos/{plantilla}. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.dominio-cic.org/</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/rutas</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/rutas/gestion-cic</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/rutas/hacer</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/rutas/ser</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/recursos</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/recursos/punto-equilibrio</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/sobre-cic</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/sobre-cic/territorio</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/sobre-cic/aliados</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/ayuda</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://www.dominio-cic.org/politica-datos</loc><lastmod>2026-09-27</lastmod></url>
+</urlset>

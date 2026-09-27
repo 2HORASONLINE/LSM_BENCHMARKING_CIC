@@ -1,0 +1,11 @@
+# robots.txt — portal público del CIC (REEMPLAZAR dominio-cic.org por el dominio definitivo)
+User-agent: *
+Allow: /
+
+Sitemap: https://www.dominio-cic.org/sitemap.xml
+
+# IMPORTANTE: no bloquear aquí lo que se quiere desindexar.
+# Si una URL está bloqueada con Disallow, Google no puede leer su "noindex".
+# - /verificar lleva <meta name="robots" content="noindex">.
+# - El campus (campus.dominio-cic.org) envía la cabecera "X-Robots-Tag: noindex, nofollow"
+#   en todas sus respuestas.

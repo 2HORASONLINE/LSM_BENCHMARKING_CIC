@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmarking LMS para el CIC | 2H.O Estudio Digital</title>
+    <meta name="description" content="Benchmarking de plataformas LMS, patrones de estructura web de los líderes y arquitectura recomendada para el Centro de Innovación Comunitario del Caribe.">
+    <!-- Ajustar la URL canónica si el informe se publica en otra ruta -->
+    <link rel="canonical" href="https://2horas.online/proyectos/benchmarking-lms-cic/">
+    <!-- Informe para cliente: noindex por defecto. Cambiar a "index, follow" si se publica como caso de estudio. -->
+    <meta name="robots" content="noindex, follow">
+    <meta name="author" content="2H.O Estudio Digital">
+    <meta name="theme-color" content="#12130E">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Benchmarking LMS para el CIC | 2H.O Estudio Digital">
+    <meta property="og:description" content="Qué hacen mejor los LMS líderes y qué estructura web le conviene al Centro de Innovación Comunitario.">
+    <meta property="og:url" content="https://2horas.online/proyectos/benchmarking-lms-cic/">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:site_name" content="2H.O Estudio Digital">
+
+    <!-- ================= GOOGLE SEARCH CONSOLE ================= -->
+    <!-- Reemplaza el content por el código de verificación real generado en search.google.com/search-console -->
+    <meta name="google-site-verification" content="REEMPLAZAR_CON_CODIGO_GSC">
+
+    <!-- ================= GOOGLE ANALYTICS 4 (GA4) ================= -->
+    <!-- Reemplaza G-XXXXXXXXXX por el Measurement ID real de la propiedad GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- ================= SCHEMA.ORG: INFORME (activo en el <head>) ================= -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Report",
+        "name": "Benchmarking LMS y estructura web recomendada para el Centro de Innovación Comunitario (CIC)",
+        "inLanguage": "es-CO",
+        "datePublished": "2026-09-27",
+        "version": "2.0",
+        "author": {
+            "@type": "Organization",
+            "name": "2H.O Estudio Digital",
+            "url": "https://2horas.online"
+        },
+        "about": {
+            "@type": "Organization",
+            "name": "Centro de Innovación Comunitario (CIC)",
+            "parentOrganization": { "@type": "Organization", "name": "Red de Mujeres del Caribe" }
+        },
+        "keywords": "LMS, benchmarking, Moodle, arquitectura web, formación de emprendedoras, Caribe colombiano"
+    }
+    </script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+    <!-- Tipografías 2H.O: Space Grotesk (titulares), Inter (texto), JetBrains Mono (etiquetas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* =============== MARCA 2H.O (v2.0) =============== */
+        :root {
+            --lima: #D7F23A;
+            --lima-suave: #EEF8B8;
+            --carbon: #12130E;
+            --carbon-2: #23241E;
+            --crema: #EEEBDC;
+            --blanco: #F5F6EE;
+            --papel: #FBFBF6;
+            --gris: #55564E;
+            --gris-2: #8A8B80;
+            --linea: rgba(18, 19, 14, 0.14);
+            --linea-fuerte: rgba(18, 19, 14, 0.85);
+            --alerta: #B43C1E;
+            --rail: 248px;
+            --display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+            --texto: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background: var(--blanco); color: var(--carbon); font-family: var(--texto); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        ::selection { background: var(--lima); color: var(--carbon); }
+        a { color: inherit; }
+        img, svg, canvas { max-width: 100%; }
+        h1, h2, h3, h4 { font-family: var(--display); letter-spacing: -0.025em; line-height: 1.08; margin: 0; font-weight: 700; }
+        p { margin: 0; }
+        code { font-family: var(--mono); font-size: 0.85em; background: var(--crema); padding: 0.1em 0.35em; }
+        :focus-visible { outline: 3px solid var(--carbon); outline-offset: 2px; box-shadow: 0 0 0 6px var(--lima); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+        /* =============== LOGO =============== */
+        .logo { font-family: var(--display); font-weight: 700; letter-spacing: -0.06em; display: inline-flex; align-items: baseline; line-height: 1; text-decoration: none; }
+        .logo .punto { display: inline-block; width: 0.26em; height: 0.26em; border-radius: 50%; background: var(--lima); margin: 0 0.02em 0 0.03em; transform: translateY(-0.02em); }
+
+        /* =============== ESTRUCTURA: RIEL + CONTENIDO =============== */
+        .topbar { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: var(--carbon); color: var(--blanco); }
+        .topbar .logo { font-size: 26px; }
+        .topbar .mono { color: var(--gris-2); }
+        .menu-btn { background: var(--lima); color: var(--carbon); border: 0; font-family: var(--mono); font-weight: 600; font-size: 12px; letter-spacing: 0.1em; padding: 10px 14px; cursor: pointer; }
+        .rail { position: fixed; inset: 0 auto 0 0; width: min(86vw, 320px); z-index: 70; background: var(--carbon); color: var(--blanco); padding: 28px 22px; display: flex; flex-direction: column; gap: 28px; transform: translateX(-102%); transition: transform 0.25s ease; overflow-y: auto; }
+        .rail.abierto { transform: translateX(0); }
+        .rail .logo { font-size: 40px; }
+        .rail-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em; color: var(--gris-2); margin-top: 8px; }
+        .rail nav ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+        .rail nav a { display: grid; grid-template-columns: 34px 1fr; align-items: baseline; padding: 9px 0; text-decoration: none; color: #C9CABF; font-size: 14px; border-top: 1px solid rgba(245,246,238,0.08); transition: color 0.15s; }
+        .rail nav a span:first-child { font-family: var(--mono); font-size: 11px; color: var(--gris-2); }
+        .rail nav a:hover, .rail nav a.activo { color: var(--blanco); }
+        .rail nav a.activo span:first-child { color: var(--lima); }
+        .rail nav a.activo { box-shadow: inset 3px 0 0 var(--lima); padding-left: 10px; margin-left: -10px; }
+        .rail-cta { margin-top: auto; display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--gris-2); }
+        .velo { position: fixed; inset: 0; background: rgba(18,19,14,0.5); z-index: 65; display: none; }
+        .velo.visible { display: block; }
+        main { padding: 0 20px 96px; }
+        .contenedor { max-width: 1120px; margin: 0 auto; }
+
+        @media (min-width: 1100px) {
+            .topbar, .velo, .menu-btn { display: none !important; }
+            .rail { transform: none; width: var(--rail); }
+            main { margin-left: var(--rail); padding: 0 56px 120px; }
+        }
+
+        /* =============== HERO =============== */
+        .hero { position: relative; padding: 64px 0 40px; overflow: hidden; }
+        .hero-meta { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--linea-fuerte); margin-top: 40px; }
+        .hero-meta div { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--linea); }
+        .hero-meta dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris); }
+        .hero-meta dd { margin: 2px 0 0; font-weight: 600; font-size: 14px; }
+        .hero h1 { font-size: clamp(44px, 8.4vw, 104px); letter-spacing: -0.05em; line-height: 0.94; max-width: 11ch; position: relative; z-index: 2; }
+        .hero h1 .resalte { background: linear-gradient(transparent 58%, var(--lima) 58%, var(--lima) 92%, transparent 92%); }
+        .hero .bajada { font-size: clamp(17px, 2vw, 20px); color: var(--gris); max-width: 58ch; margin-top: 24px; position: relative; z-index: 2; }
+        .anillo { position: absolute; right: -210px; top: 150px; width: 420px; height: 420px; border-radius: 50%; border: 78px solid var(--carbon); opacity: 0.95; z-index: 1; pointer-events: none; }
+        .anillo::after { content: ""; position: absolute; width: 74px; height: 74px; border-radius: 50%; background: var(--lima); left: -26px; bottom: -6px; }
+        @media (max-width: 900px) { .anillo { width: 240px; height: 240px; border-width: 44px; right: -110px; top: 8px; opacity: 0.12; } .anillo::after { display: none; } }
+        @media (min-width: 720px) { .hero-meta { grid-template-columns: repeat(4, 1fr); } }
+        .acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; position: relative; z-index: 2; }
+
+        /* =============== BOTONES Y ETIQUETAS =============== */
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1.5px solid var(--carbon); background: var(--carbon); color: var(--blanco); cursor: pointer; font-family: var(--texto); transition: transform 0.12s ease, background 0.15s; }
+        .btn:hover { transform: translateY(-1px); }
+        .btn-lima { background: var(--lima); color: var(--carbon); border-color: var(--lima); }
+        .btn-linea { background: transparent; color: var(--carbon); }
+        .btn .flecha { font-family: var(--mono); }
+        .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+        .tag { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--linea-fuerte); white-space: nowrap; }
+        .tag-lima { background: var(--lima); border-color: var(--lima); }
+        .tag-oscuro { background: var(--carbon); color: var(--blanco); border-color: var(--carbon); }
+
+        /* =============== SECCIONES =============== */
+        .seccion { padding: 88px 0 0; scroll-margin-top: 72px; }
+        .rotulo { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--carbon); padding-bottom: 14px; border-bottom: 1px solid var(--linea-fuerte); }
+        .rotulo .num { background: var(--carbon); color: var(--lima); padding: 3px 8px; }
+        .seccion h2 { font-size: clamp(32px, 4.6vw, 56px); margin-top: 28px; max-width: 18ch; }
+        .intro { font-size: 18px; color: var(--gris); max-width: 68ch; margin-top: 18px; }
+        .intro strong, .texto strong { color: var(--carbon); }
+        .bloque { margin-top: 40px; }
+        .subtitulo { font-size: 22px; margin-bottom: 16px; }
+        .texto { color: var(--gris); font-size: 15px; }
+        .nota { font-size: 13px; color: var(--gris); margin-top: 12px; }
+
+        /* Rejilla con líneas compartidas (estilo tablero de marca) */
+        .rejilla { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--linea-fuerte); border-left: 1px solid var(--linea); }
+        .rejilla > * { border-right: 1px solid var(--linea); border-bottom: 1px solid var(--linea); padding: 24px; background: transparent; }
+        @media (min-width: 720px) { .rejilla.c2 { grid-template-columns: repeat(2, 1fr); } .rejilla.c4 { grid-template-columns: repeat(2, 1fr); } .rejilla.c3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1000px) { .rejilla.c3 { grid-template-columns: repeat(3, 1fr); } .rejilla.c4 { grid-template-columns: repeat(4, 1fr); } }
+        .rejilla > *, .wf-zona > *, .capa > * { min-width: 0; overflow-wrap: anywhere; }
+        @media (max-width: 480px) { .topbar .mono { display: none; } .rejilla > * { padding: 18px; } }
+        .celda-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--gris); text-transform: uppercase; }
+        .celda h3 { font-size: 20px; margin: 10px 0 10px; }
+        .celda ul { margin: 0; padding-left: 18px; color: var(--gris); font-size: 14.5px; }
+        .celda li { margin-bottom: 6px; }
+        .cifra { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 5vw, 60px); letter-spacing: -0.05em; line-height: 1; }
+        .cifra-txt { font-size: 13.5px; color: var(--gris); margin-top: 8px; }
+        .oscuro { background: var(--carbon) !important; color: var(--blanco); }
+        .oscuro .texto, .oscuro p { color: #CFD0C6; }
+        .oscuro .celda-num { color: var(--lima); }
+        .lima { background: var(--lima) !important; color: var(--carbon); }
+        .crema { background: var(--crema) !important; }
+
+        /* Hallazgos */
+        .hallazgos { counter-reset: h; list-style: none; padding: 0; margin: 0; }
+        .hallazgos li { counter-increment: h; display: grid; grid-template-columns: 48px 1fr; gap: 8px; padding: 16px 0; border-bottom: 1px solid rgba(245,246,238,0.12); font-size: 15.5px; }
+        .hallazgos li::before { content: "0" counter(h); font-family: var(--mono); color: var(--lima); font-size: 13px; padding-top: 3px; }
+
+        /* =============== TABLAS =============== */
+        .desplazable { overflow-x: auto; -webkit-overflow-scrolling: touch; border-top: 1px solid var(--linea-fuerte); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left; font-weight: 600; padding: 14px 12px; border-bottom: 1px solid var(--linea-fuerte); vertical-align: bottom; }
+        td { padding: 14px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; color: var(--gris); }
+        td strong, td .fuerte { color: var(--carbon); font-weight: 600; }
+        .t-min { min-width: 760px; }
+        .ok { color: var(--carbon); font-weight: 700; }
+        .ok::before { content: "● "; color: #7E9A00; }
+        .no { color: var(--alerta); font-weight: 700; }
+
+        /* =============== FILTROS =============== */
+        .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+        .filtro { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 12px; border: 1px solid var(--carbon); background: transparent; cursor: pointer; color: var(--carbon); }
+        .filtro[aria-pressed="true"] { background: var(--carbon); color: var(--lima); }
+
+        /* Lista de referentes */
+        .referentes { border-top: 1px solid var(--linea-fuerte); margin-top: 20px; }
+        .ref { border-bottom: 1px solid var(--linea); }
+        .ref summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+        .ref summary::-webkit-details-marker { display: none; }
+        .ref-nombre { font-family: var(--display); font-size: 22px; font-weight: 700; letter-spacing: -0.03em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .ref-dato { font-size: 13.5px; color: var(--gris); }
+        .ref-leccion { font-size: 14px; }
+        .ref-leccion b { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--lima); padding: 1px 6px; margin-right: 6px; font-weight: 600; }
+        .ref-mas { font-family: var(--mono); font-size: 18px; justify-self: end; transition: transform 0.2s; }
+        .ref[open] .ref-mas { transform: rotate(45deg); }
+        .ref-cuerpo { padding: 0 0 22px; display: grid; gap: 12px; color: var(--gris); font-size: 14.5px; }
+        .ref-cuerpo a { font-weight: 600; color: var(--carbon); }
+        @media (min-width: 900px) {
+            .ref summary { grid-template-columns: 1.1fr 1fr 1.5fr 28px; align-items: center; gap: 20px; }
+            .ref-cuerpo { grid-template-columns: 1.1fr 2.5fr 28px; }
+            .ref-cuerpo > p { grid-column: 2; }
+            .ref-cuerpo > a { grid-column: 2; }
+        }
+
+        /* =============== GRÁFICAS =============== */
+        .grafica { position: relative; height: 320px; width: 100%; }
+        @media (min-width: 768px) { .grafica { height: 360px; } }
+
+        /* =============== MATRIZ =============== */
+        .puntaje { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 26px; font-family: var(--mono); font-weight: 600; font-size: 12.5px; }
+        .p5 { background: var(--carbon); color: var(--lima); }
+        .p4 { background: var(--lima); color: var(--carbon); }
+        .p3 { background: var(--crema); color: var(--carbon); }
+        .p2, .p1 { background: transparent; color: var(--alerta); border: 1px solid var(--alerta); }
+        .peso { display: flex; align-items: center; gap: 8px; }
+        input[type=range] { accent-color: var(--carbon); width: 100%; }
+        .peso input { width: 90px; }
+        .peso output { font-family: var(--mono); font-weight: 600; min-width: 22px; }
+        tfoot td, tfoot th { background: var(--carbon); color: var(--blanco); border-bottom: 0; }
+        tfoot td { font-family: var(--mono); font-weight: 600; text-align: center; }
+        tfoot td.ganador { background: var(--lima); color: var(--carbon); }
+        .enlace-btn { background: none; border: 0; padding: 0; margin-top: 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: underline; cursor: pointer; color: var(--carbon); }
+
+        /* =============== PATRONES / RECORRIDOS =============== */
+        .patron-plat { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .recorrido { list-style: none; padding: 0; margin: 14px 0 0; counter-reset: paso; }
+        .recorrido li { counter-increment: paso; position: relative; padding: 0 0 14px 34px; font-size: 14px; color: var(--gris); }
+        .recorrido li::before { content: counter(paso); position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--carbon); color: var(--lima); font-family: var(--mono); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+        .recorrido li::after { content: ""; position: absolute; left: 10.5px; top: 24px; bottom: 2px; width: 1px; background: var(--linea-fuerte); }
+        .recorrido li:last-child::after { display: none; }
+
+        /* =============== CAPAS DE ARQUITECTURA =============== */
+        .capas { display: grid; gap: 0; border-top: 1px solid var(--linea-fuerte); }
+        .capa { display: grid; grid-template-columns: 1fr; gap: 14px; padding: 24px 0; border-bottom: 1px solid var(--linea); }
+        .capa-id { display: flex; gap: 14px; align-items: baseline; }
+        .capa-id .n { font-family: var(--display); font-size: 48px; font-weight: 700; letter-spacing: -0.05em; line-height: 1; }
+        .capa-id h3 { font-size: 24px; }
+        .capa-id .dom { font-family: var(--mono); font-size: 12px; color: var(--gris); margin-top: 4px; }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .chip { font-size: 13px; padding: 6px 10px; background: var(--papel); border: 1px solid var(--linea); }
+        @media (min-width: 900px) { .capa { grid-template-columns: 1.1fr 1.4fr 1fr; align-items: start; gap: 28px; } }
+
+        /* =============== WIREFRAME =============== */
+        .wf-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 16px; }
+        .wf-zona { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 1000px) { .wf-zona { grid-template-columns: 1.25fr 1fr; align-items: start; } }
+        .marco { background: var(--crema); padding: 18px; border: 1px solid var(--linea); }
+        .marco-nav { display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: var(--carbon); color: var(--gris-2); font-family: var(--mono); font-size: 11px; }
+        .marco-nav i { width: 8px; height: 8px; border-radius: 50%; background: #4A4B44; display: inline-block; }
+        .marco-nav span { margin-left: 8px; color: #CFD0C6; }
+        .marco-cuerpo { background: var(--papel); padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .telefono { max-width: 340px; margin: 0 auto; background: var(--carbon); padding: 14px 10px 18px; border-radius: 34px; }
+        .telefono .marco-cuerpo { border-radius: 22px; min-height: 560px; }
+        .telefono .muesca { width: 90px; height: 6px; border-radius: 6px; background: #3A3B34; margin: 0 auto 10px; }
+        .wf { cursor: pointer; border: 1.5px dashed rgba(18,19,14,0.35); padding: 12px; font-size: 12.5px; background: var(--blanco); transition: border-color 0.15s, background 0.15s; text-align: left; font-family: var(--texto); color: var(--carbon); width: 100%; display: block; }
+        .wf:hover, .wf.activo { border: 1.5px solid var(--carbon); background: var(--lima-suave); }
+        .wf .wf-t { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); display: block; margin-bottom: 4px; }
+        .wf .wf-h { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
+        .wf-oscuro { background: var(--carbon) !important; color: var(--blanco) !important; border-color: var(--carbon) !important; }
+        .wf-oscuro .wf-t { color: var(--lima); }
+        .wf-fila { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .wf-fila span { background: var(--crema); padding: 4px 8px; font-size: 11px; }
+        .wf-oscuro .wf-fila span { background: var(--carbon-2); color: var(--blanco); }
+        .barra { height: 6px; background: var(--crema); margin-top: 4px; }
+        .barra b { display: block; height: 100%; background: var(--carbon); }
+        .inspector { border-top: 4px solid var(--carbon); background: var(--papel); padding: 24px; position: sticky; top: 24px; }
+        .inspector h3 { font-size: 26px; margin: 12px 0; }
+        .inspector .specs { display: grid; gap: 10px; margin-top: 18px; }
+        .inspector .specs div { padding: 12px; border-left: 3px solid var(--lima); background: var(--blanco); font-size: 13.5px; color: var(--gris); }
+        .inspector .specs strong { color: var(--carbon); }
+        .arbol { font-family: var(--mono); font-size: 12.5px; line-height: 1.85; background: var(--papel); border: 1px solid var(--linea); padding: 18px; white-space: pre; overflow-x: auto; color: var(--carbon); }
+
+        /* =============== CÓDIGO =============== */
+        .codigo { background: var(--carbon); color: var(--blanco); padding: 24px; }
+        .codigo pre { margin: 0; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: #E6F5A0; background: #0A0B07; padding: 18px; overflow: auto; max-height: 420px; white-space: pre; }
+        .codigo .filtro { border-color: #4A4B44; color: #CFD0C6; }
+        .codigo .filtro[aria-pressed="true"] { background: var(--lima); color: var(--carbon); border-color: var(--lima); }
+        .aviso { border-left: 4px solid var(--lima); background: var(--carbon-2); padding: 14px 16px; font-size: 13.5px; color: #CFD0C6; margin-top: 16px; }
+        .aviso strong { color: var(--lima); }
+        .aviso-claro { border-left: 4px solid var(--carbon); background: var(--lima-suave); padding: 14px 16px; font-size: 14px; color: var(--carbon); margin-top: 16px; }
+
+        /* =============== CWV =============== */
+        .cwv-estado { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 14px; }
+        .est-bueno { background: var(--lima); color: var(--carbon); }
+        .est-medio { background: var(--crema); color: var(--carbon); border: 1px solid var(--carbon); }
+        .est-malo { background: var(--alerta); color: #fff; }
+        .metrica label { font-weight: 600; font-size: 14px; }
+        .metrica .valor { font-family: var(--display); font-size: 36px; font-weight: 700; letter-spacing: -0.04em; }
+        .metrica .estado { font-size: 13px; font-weight: 600; margin-top: 6px; }
+
+        /* =============== EMBUDO =============== */
+        .embudo { display: grid; grid-template-columns: 1fr; }
+        .embudo > div { padding: 20px; border-bottom: 1px solid rgba(245,246,238,0.12); }
+        .embudo .celda-num { color: var(--lima); }
+        .embudo h4 { font-size: 18px; margin: 6px 0; color: var(--blanco); }
+        .embudo p { font-size: 13.5px; color: #CFD0C6; }
+        @media (min-width: 900px) { .embudo { grid-template-columns: repeat(5, 1fr); } .embudo > div { border-bottom: 0; border-right: 1px solid rgba(245,246,238,0.12); } .embudo > div:last-child { border-right: 0; } }
+
+        /* =============== FAQ =============== */
+        .faq details { border-bottom: 1px solid var(--linea); }
+        .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.015em; }
+        .faq summary::after { content: "+"; font-family: var(--mono); font-size: 20px; }
+        .faq details[open] summary::after { content: "−"; }
+        .faq details p { padding: 0 0 20px; color: var(--gris); max-width: 72ch; }
+
+        /* =============== PIE =============== */
+        .pie { margin-top: 120px; background: var(--carbon); color: var(--blanco); padding: 56px 24px; }
+        .pie .logo { font-size: 72px; }
+        .pie-sub { font-family: var(--mono); font-size: 12px; letter-spacing: 0.4em; color: var(--gris-2); margin-top: 10px; }
+        .pie-lema { font-family: var(--display); font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.04em; margin-top: 36px; }
+        .pie-lema span { background: var(--lima); color: var(--carbon); padding: 0 8px; }
+        @media (min-width: 1100px) { .pie { margin-left: var(--rail); padding: 64px 56px; } }
+
+        /* CTA móvil fijo */
+        .cta-movil { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; gap: 8px; padding: 10px 12px; background: var(--blanco); border-top: 1px solid var(--linea-fuerte); }
+        .cta-movil a { flex: 1; justify-content: center; padding: 12px; font-size: 14px; }
+        @media (min-width: 1100px) { .cta-movil { display: none; } }
+
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    </style>
+</head>
+<!-- Identidad: 2H.O Estudio Digital — Lima #D7F23A, Carbón #12130E, Crema #EEEBDC, Blanco #F5F6EE. Space Grotesk + Inter + JetBrains Mono. -->
+<!-- Estructura: riel de índice fijo (escritorio) + 11 capítulos numerados estilo tablero de marca.
+     00 Resumen · 01 Contexto · 02 Mercado · 03 Benchmark · 04 Funciones · 05 Matriz · 06 Patrones de los LMS pilares
+     07 Estructura recomendada (3 capas + wireframe + recorridos) · 08 UX y embudo · 09 Rendimiento · 10 SEO técnico · 11 FAQ · Fuentes -->
+<!-- Archivos complementarios entregados junto a este HTML: robots.txt, sitemap.xml, llms.txt (para el futuro sitio del CIC). -->
+<body>
+
+    <!-- BARRA SUPERIOR (móvil / tableta) -->
+    <header class="topbar">
+        <a href="#inicio" class="logo" aria-label="2H.O Estudio Digital">2H<span class="punto"></span>O</a>
+        <span class="mono">Benchmarking LMS · CIC</span>
+        <button class="menu-btn" id="menuBtn" aria-controls="riel" aria-expanded="false" onclick="toggleRail()">Índice</button>
+    </header>
+    <div class="velo" id="velo" onclick="toggleRail(false)"></div>
+
+    <!-- RIEL DE ÍNDICE -->
+    <aside class="rail" id="riel" aria-label="Índice del informe">
+        <div>
+            <a href="#inicio" class="logo" aria-label="2H.O Estudio Digital" onclick="toggleRail(false)">2H<span class="punto"></span>O</a>
+            <div class="rail-sub">ESTUDIO DIGITAL</div>
+        </div>
+        <nav>
+            <ol>
+                <li><a href="#inicio" onclick="toggleRail(false)"><span>00</span><span>Resumen</span></a></li>
+                <li><a href="#contexto" onclick="toggleRail(false)"><span>01</span><span>Contexto del CIC</span></a></li>
+                <li><a href="#mercado" onclick="toggleRail(false)"><span>02</span><span>Mercado LMS</span></a></li>
+                <li><a href="#benchmark" onclick="toggleRail(false)"><span>03</span><span>Benchmark</span></a></li>
+                <li><a href="#funciones" onclick="toggleRail(false)"><span>04</span><span>Funcionalidades</span></a></li>
+                <li><a href="#matriz" onclick="toggleRail(false)"><span>05</span><span>Matriz ponderada</span></a></li>
+                <li><a href="#patrones" onclick="toggleRail(false)"><span>06</span><span>Patrones de los LMS pilares</span></a></li>
+                <li><a href="#estructura" onclick="toggleRail(false)"><span>07</span><span>Estructura recomendada</span></a></li>
+                <li><a href="#ux" onclick="toggleRail(false)"><span>08</span><span>UX y embudo</span></a></li>
+                <li><a href="#rendimiento" onclick="toggleRail(false)"><span>09</span><span>Rendimiento</span></a></li>
+                <li><a href="#seo" onclick="toggleRail(false)"><span>10</span><span>SEO técnico</span></a></li>
+                <li><a href="#faq" onclick="toggleRail(false)"><span>11</span><span>Preguntas frecuentes</span></a></li>
+                <li><a href="#fuentes" onclick="toggleRail(false)"><span>→</span><span>Fuentes</span></a></li>
+            </ol>
+        </nav>
+        <div class="rail-cta">
+            <a href="#estructura" class="btn btn-lima" onclick="toggleRail(false)">Ver estructura <span class="flecha">→</span></a>
+            <span>Cliente: CIC · Red de Mujeres del Caribe<br>Versión 2.0 · Septiembre 2026</span>
+        </div>
+    </aside>
+
+    <main>
+        <div class="contenedor">
+
+            <!-- 00 · HERO / RESUMEN -->
+            <section class="hero" id="inicio">
+                <div class="anillo" aria-hidden="true"></div>
+                <p class="mono" style="position:relative;z-index:2">2H.O / Benchmarking / Plataforma LMS</p>
+                <h1 style="margin-top:22px">De benchmark a <span class="resalte">plataforma.</span></h1>
+                <p class="bajada">Qué hacen mejor los sistemas de gestión del aprendizaje (LMS) líderes del mundo y de Colombia, y cómo convertir esos patrones en la plataforma del <strong style="color:var(--carbon)">Centro de Innovación Comunitario (CIC)</strong>: un sitio público, un campus de formación y un panel de gestión pensados para mujeres emprendedoras del Caribe que estudian desde el celular.</p>
+
+                <div class="acciones">
+                    <a href="#estructura" class="btn btn-lima">Estructura recomendada <span class="flecha">→</span></a>
+                    <a href="#matriz" class="btn btn-linea">Matriz de decisión</a>
+                    <button type="button" class="btn btn-linea" onclick="shareThisPage()" aria-label="Compartir este informe">Compartir</button>
+                </div>
+
+                <dl class="hero-meta">
+                    <div><dt>Cliente</dt><dd>CIC · Red de Mujeres del Caribe</dd></div>
+                    <div><dt>Preparado por</dt><dd>2H.O Estudio Digital</dd></div>
+                    <div><dt>Para</dt><dd>Secretaría Técnica, APRODEFA, desarrollo</dd></div>
+                    <div><dt>Fecha · versión</dt><dd>27 sep 2026 · v2.0</dd></div>
+                </dl>
+            </section>
+
+            <!-- CIFRAS -->
+            <div class="rejilla c4">
+                <div><div class="cifra">200</div><p class="cifra-txt">Emprendedoras en la ruta HACER-SER, con 28 h de formación directa cada una.</p></div>
+                <div><div class="cifra">24</div><p class="cifra-txt">Dinamizadoras (3 por satélite) que deben aprobar el curso de gestión del CIC.</p></div>
+                <div><div class="cifra">8·7·13</div><p class="cifra-txt">Satélites, departamentos y municipios del Caribe colombiano.</p></div>
+                <div class="lima"><div class="cifra">56,9%</div><p class="cifra-txt" style="color:var(--carbon)">Hogares rurales con internet en Colombia (DANE, ECV 2025). Móvil primero, sin excusas.</p></div>
+            </div>
+
+            <!-- HALLAZGOS -->
+            <div class="rejilla c2" style="border-top:0">
+                <div class="oscuro" style="grid-column:1/-1">
+                    <p class="celda-num">Resumen ejecutivo · 4 hallazgos</p>
+                    <ol class="hallazgos" style="margin-top:10px">
+                        <li><span>Moodle está en el <strong style="color:var(--lima)">74 %</strong> de las instituciones hispanohablantes y es la base de Zajuna, el campus del SENA: es el estándar de facto en Colombia y ganó la matriz ponderada con los pesos sugeridos.</span></li>
+                        <li><span>Los LMS pilares (Open edX, Canvas, Coursera) no son "un sitio web": separan <strong style="color:var(--lima)">portal público, campus y gestión</strong>. El CIC debe estructurarse igual, en tres capas.</span></li>
+                        <li><span>El portal no debe organizarse como una web institucional clásica, sino alrededor de <strong style="color:var(--lima)">rutas de aprendizaje, recursos y entrada por rol</strong>; lo institucional se concentra en "Sobre el CIC".</span></li>
+                        <li><span>Dos riesgos técnicos del plan actual: los videos en Google Drive (límites de reproducción y sin seguimiento) y construir el LMS desde cero antes del 27 de noviembre.</span></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- 01 · CONTEXTO -->
+            <section class="seccion" id="contexto">
+                <div class="rotulo"><span class="num">01</span><span>Contexto del CIC</span></div>
+                <h2>Qué necesita la plataforma, antes de mirar plataformas.</h2>
+                <p class="intro">El CIC no es un centro de "hardware": su tesis es instalar <strong>"software social"</strong> —capacidades, marcos mentales y redes— en mujeres de la economía popular, apoyado en la Red de Mujeres del Caribe y sus más de 30 años de trayectoria. El conocimiento baja <strong>en cascada</strong>: Secretaría Técnica (5) → 8 satélites con 24 dinamizadoras → 200 emprendedoras. La plataforma sostiene esa cascada y devuelve datos para mejorar cada ciclo.</p>
+
+                <div class="rejilla c3 bloque">
+                    <div class="celda">
+                        <p class="celda-num">A / Usuarias</p>
+                        <h3>Tres roles, tres necesidades</h3>
+                        <ul>
+                            <li><strong>Emprendedora:</strong> guía semana a semana (6 semanas HACER) y plantillas A1–A24.</li>
+                            <li><strong>Dinamizadora / Secretaria:</strong> curso de gestión (5 módulos, ~2 h), guías de facilitación, registro de sesiones y evidencias.</li>
+                            <li><strong>Administradora:</strong> aprobar registros, ver avance, subir videos y gestionar cuestionarios.</li>
+                        </ul>
+                    </div>
+                    <div class="celda">
+                        <p class="celda-num">B / Reglas</p>
+                        <h3>Lo que exige el modelo formativo</h3>
+                        <ul>
+                            <li>Cuestionario por módulo con <strong>2 intentos</strong>; por debajo del <strong>70 %</strong> en el segundo, el módulo se bloquea hasta repetirlo.</li>
+                            <li>Registro con nombre y cédula validados contra la base oficial de vinculación.</li>
+                            <li>Constancias con requisitos verificables; emprendedoras evaluadas por portafolio de evidencias.</li>
+                        </ul>
+                    </div>
+                    <div class="celda crema">
+                        <p class="celda-num">C / Realidad</p>
+                        <h3>El desafío digital</h3>
+                        <p class="texto">Miedo a los números, poca práctica de registro y alta carga de cuidado; acceso por celular con paquetes de datos. La plataforma debe ser <strong>corta, práctica y liviana</strong>, y quedar como caja de herramientas permanente después del proyecto. Entrega contractual: <strong>27 de noviembre de 2026</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num">Horas del proceso formativo por componente · total 62 h</p>
+                        <div class="grafica" style="margin-top:12px"><canvas id="hoursChart" role="img" aria-label="Horas por componente: Secretaría 32, curso de gestión 2, ruta HACER 12, ruta SER 16"></canvas></div>
+                        <p class="nota">Fuente: Documento técnico y metodológico de los procesos formativos (6.4).</p>
+                    </div>
+                    <div>
+                        <p class="celda-num">Qué aloja la plataforma (sección 7.5 del documento 6.4)</p>
+                        <table style="margin-top:10px">
+                            <caption class="sr-only">Inventario funcional de la plataforma</caption>
+                            <tbody>
+                                <tr><td><strong>Curso de gestión del CIC</strong></td><td>5 módulos: Introducción (20 min), Ecosistema (25), Cómo opera el centro (25), La información del centro (15), Los pilares en acción (35).</td></tr>
+                                <tr><td><strong>Ruta HACER</strong></td><td>Por semana: video corto, guion verificado y plantillas descargables.</td></tr>
+                                <tr><td><strong>Ruta SER</strong></td><td>Guías y materiales de los 4 talleres.</td></tr>
+                                <tr><td><strong>Operación</strong></td><td>Grabaciones, foros, asistencia, avance individual, evidencias, reporte semanal automático y constancias.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 02 · MERCADO -->
+            <section class="seccion" id="mercado">
+                <div class="rotulo"><span class="num">02</span><span>Mercado LMS</span></div>
+                <h2>Un mercado dominado por un estándar abierto.</h2>
+                <p class="intro">En el mundo hispanohablante Moodle no es una opción entre muchas: es la norma. En Norteamérica, en cambio, domina Canvas. Esa diferencia importa para el CIC por soporte local, talento disponible y costo.</p>
+
+                <div class="rejilla c2 bloque">
+                    <div style="grid-column:1/-1">
+                        <p class="celda-num">Participación por número de instituciones · mundo hispanohablante</p>
+                        <div class="grafica" style="margin-top:12px"><canvas id="marketChart" role="img" aria-label="Participación de mercado LMS: Moodle 74 por ciento, Blackboard 5, Canvas 5, Open LMS 3, Classroom 3, Brightspace 2, Chamilo 2, e-Study 2, otros 5"></canvas></div>
+                        <p class="nota">Fuente: ListEdTech, septiembre de 2026 (≈2.150 instituciones de educación superior y 24 millones de estudiantes). Los porcentajes están redondeados y pueden sumar 101 %.</p>
+                    </div>
+                </div>
+                <div class="rejilla c4" style="border-top:0">
+                    <div><div class="cifra" style="font-size:44px">72%</div><p class="cifra-txt">Moodle medido por matrícula de estudiantes en el mundo hispano.</p></div>
+                    <div><div class="cifra" style="font-size:44px">50%</div><p class="cifra-txt">Canvas por matrícula en educación superior de EE. UU. y Canadá (2024).</p></div>
+                    <div><div class="cifra" style="font-size:44px">147 mil</div><p class="cifra-txt">Sitios Moodle registrados en 236 países, con más de 528 millones de usuarios (stats.moodle.org).</p></div>
+                    <div class="oscuro"><p class="celda-num">Riesgo de proveedor</p><p style="margin-top:8px;font-size:14px">Anthology (Blackboard) entró en quiebra (Chapter 11) en 2025 e Instructure (Canvas) pasó a manos del fondo KKR en 2024. En un proyecto con recursos públicos, la independencia del proveedor pesa.</p></div>
+                </div>
+            </section>
+
+            <!-- 03 · BENCHMARK -->
+            <section class="seccion" id="benchmark">
+                <div class="rotulo"><span class="num">03</span><span>Benchmark de plataformas</span></div>
+                <h2>14 referentes, una lección concreta de cada uno.</h2>
+                <p class="intro">Se combinó un <strong>benchmarking competitivo</strong> (LMS que compiten entre sí) con uno <strong>funcional</strong> (organizaciones que forman a poblaciones vulnerables con acompañamiento y certificación), siguiendo las fases de Robert C. Camp: planeación, análisis, integración, acción y madurez. Toca cada fila para ver el detalle.</p>
+
+                <div class="filtros" role="group" aria-label="Filtrar referentes">
+                    <button class="filtro" data-filtro="all" aria-pressed="true" onclick="filterBenchmark('all')">Todos</button>
+                    <button class="filtro" data-filtro="opensource" aria-pressed="false" onclick="filterBenchmark('opensource')">Open source</button>
+                    <button class="filtro" data-filtro="saas" aria-pressed="false" onclick="filterBenchmark('saas')">SaaS / académicos</button>
+                    <button class="filtro" data-filtro="wordpress" aria-pressed="false" onclick="filterBenchmark('wordpress')">WordPress</button>
+                    <button class="filtro" data-filtro="social" aria-pressed="false" onclick="filterBenchmark('social')">Referentes sociales / Colombia</button>
+                </div>
+                <div class="referentes" id="benchmarkContainer"></div>
+            </section>
+
+            <!-- 04 · FUNCIONALIDADES -->
+            <section class="seccion" id="funciones">
+                <div class="rotulo"><span class="num">04</span><span>Funcionalidades clave</span></div>
+                <h2>Cada requisito del CIC, resuelto como lo hacen los líderes.</h2>
+                <p class="intro">Qué adoptar tal cual, qué configurar y qué construir.</p>
+                <div class="desplazable bloque">
+                    <table class="t-min">
+                        <caption class="sr-only">Requisitos del CIC comparados con las prácticas de las principales plataformas LMS</caption>
+                        <thead><tr><th style="width:20%">Requisito CIC</th><th style="width:40%">Cómo lo resuelven los líderes</th><th style="width:40%">Recomendación para el CIC</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Registro validado por cédula</strong></td><td>Zajuna (SENA, sobre Moodle) ingresa con tipo y número de documento. Moodle permite carga masiva de usuarias por CSV.</td><td>Crear las cuentas desde la base oficial de vinculación (cédula = usuario), sin autorregistro abierto.</td></tr>
+                            <tr><td><strong>2 intentos, mínimo 70 %, bloqueo</strong></td><td>Moodle: intentos permitidos, calificación para aprobar y restricción de acceso por finalización. TalentLMS y LearnDash ofrecen lógicas similares.</td><td>2 intentos + nota mínima 70 % + el siguiente módulo se abre solo al aprobar. "Repetir el video" exige un video con seguimiento (H5P o API de YouTube).</td></tr>
+                            <tr><td><strong>Video + descargables + evaluación</strong></td><td>Canvas organiza todo en "Módulos" lineales con prerrequisitos; Open edX en unidades de video + preguntas.</td><td>Una página por tema con la misma plantilla: video, herramientas, cuestionario. Consistencia = menos carga cognitiva.</td></tr>
+                            <tr><td><strong>Avance e insignias</strong></td><td>Moodle 5.0 rediseñó la vista general del curso y trae Open Badges nativo. Khan Academy y Coursera muestran "continuar donde lo dejaste".</td><td>Barra de progreso por ruta, un botón "Continuar" e insignia por módulo aprobado (estándar Open Badges).</td></tr>
+                            <tr><td><strong>Constancias</strong></td><td>Plugins de certificados con código de verificación (Moodle); Coursera verifica certificados por URL.</td><td>PDF con código único y página pública de verificación; emisión automática al cumplir los requisitos del documento 6.4.</td></tr>
+                            <tr><td><strong>Evidencias, asistencia, reporte semanal</strong></td><td>Moodle: tareas con fotos desde la app, plugin de asistencia y generador de informes personalizados.</td><td>Tarea por sesión para subir fotos, lista de chequeo (A18) y bitácora (A19) como actividades; informe semanal por satélite.</td></tr>
+                            <tr><td><strong>Datos móviles limitados</strong></td><td>La app de Moodle descarga cursos, permite responder cuestionarios sin conexión y sincroniza luego.</td><td>Priorizar app o modo sin conexión; páginas ligeras; videos de 8–15 minutos en calidad adaptable.</td></tr>
+                            <tr><td><strong>Caja de herramientas permanente</strong></td><td>Repositorios abiertos; TodasConectadas (ONU Mujeres) publica recursos gratuitos de emprendimiento.</td><td>Biblioteca pública e indexable de plantillas + área privada con guiones; licencia clara que proteja la propiedad intelectual de la Red.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 05 · MATRIZ -->
+            <section class="seccion" id="matriz">
+                <div class="rotulo"><span class="num">05</span><span>Matriz ponderada</span></div>
+                <h2>Seis caminos, siete criterios, una decisión.</h2>
+                <p class="intro">Puntaje de 1 a 5 por criterio; el total es Σ(peso × puntaje) normalizado a 100. <strong>Los puntajes son una valoración cualitativa basada en la investigación</strong>: mueve los pesos según las prioridades del CIC y confirma el resultado con un piloto corto (registro con cédula, cuestionario con bloqueo y constancia).</p>
+
+                <div class="rejilla c2 bloque" style="grid-template-columns:1fr">
+                    <div style="padding:0">
+                        <div class="desplazable" style="border-top:0">
+                            <table style="min-width:720px">
+                                <caption class="sr-only">Matriz ponderada de alternativas de plataforma</caption>
+                                <thead id="matrixHead"></thead>
+                                <tbody id="matrixBody"></tbody>
+                                <tfoot id="matrixFoot"></tfoot>
+                            </table>
+                        </div>
+                        <div style="padding:0 16px 16px"><button class="enlace-btn" onclick="resetWeights()">Restablecer pesos sugeridos</button></div>
+                    </div>
+                </div>
+                <div class="rejilla c2" style="border-top:0">
+                    <div>
+                        <p class="celda-num">Puntaje total (0–100)</p>
+                        <p id="matrixWinner" class="tag tag-lima" style="margin-top:10px">—</p>
+                        <div class="grafica" style="margin-top:14px;height:300px"><canvas id="matrixChart" role="img" aria-label="Puntaje total por alternativa"></canvas></div>
+                    </div>
+                    <div id="optionNotes" style="padding:0"></div>
+                </div>
+
+                <div class="rejilla c3" style="border-top:0">
+                    <div class="oscuro" style="grid-column:1/-1">
+                        <p class="celda-num">Veredicto</p>
+                        <h3 style="font-size:28px;margin-top:10px">Moodle 5.3 LTS como campus, dentro de una arquitectura de tres capas.</h3>
+                        <p style="margin-top:12px;max-width:80ch">Moodle 5.3 es la próxima versión de soporte extendido (LTS): sale el <strong style="color:var(--lima)">5 de octubre de 2026</strong> y tendrá parches de seguridad hasta el <strong style="color:var(--lima)">1 de octubre de 2029</strong>, lo que cubre la vida del proyecto y la caja de herramientas posterior. Alojarlo en un VPS (el hosting compartido sirve solo para pocos usuarios, según la documentación de Moodle) o usar MoodleCloud si no hay capacidad técnica. El Plan de Trabajo propone construir el LMS con Firebase: el benchmarking sugiere reservar el desarrollo propio para el Módulo 3 (CRM por emprendimiento), conectado al campus por API.</p>
+                    </div>
+                    <div class="crema" style="grid-column:1/-1">
+                        <p class="celda-num">Puntos por validar con el CIC antes de construir</p>
+                        <ul class="texto" style="margin-top:10px;padding-left:18px">
+                            <li><strong>Aliados:</strong> el documento 6.4 cita el contrato entre FUCOLDE y APRODEFA; el Plan de Trabajo menciona a FUPAD como operador del Convenio 432. Confirmar qué entidades y logos van en el sitio.</li>
+                            <li><strong>Regla de certificación:</strong> el Plan pide completar los dos cursos de dinamizadora; el documento 6.4 exige curso de gestión aprobado + transferencia + facilitación con evidencias. Definir una sola regla.</li>
+                            <li><strong>Recursos públicos:</strong> qué plantillas A1–A24 pueden publicarse abiertas y bajo qué licencia, sin afectar la propiedad intelectual de la Red.</li>
+                            <li><strong>Dominio definitivo</strong> y cuentas (Hostinger, VPS o MoodleCloud).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 06 · PATRONES DE LOS LMS PILARES -->
+            <section class="seccion" id="patrones">
+                <div class="rotulo"><span class="num">06</span><span>Patrones de los LMS pilares</span></div>
+                <h2>Cómo se estructuran por dentro los líderes.</h2>
+                <p class="intro">Antes de proponer la estructura del CIC se analizó cómo organizan su web las plataformas pilares. La conclusión cambia el enfoque: <strong>ninguna es "un sitio con un botón de login"</strong>. Todas separan la vitrina pública, la experiencia de aprendizaje y la gestión, y organizan la navegación alrededor de lo que la persona quiere aprender, no de la institución.</p>
+
+                <div class="desplazable bloque">
+                    <table class="t-min">
+                        <caption class="sr-only">Estructura web de las plataformas LMS pilares</caption>
+                        <thead><tr><th style="width:16%">Plataforma</th><th style="width:44%">Cómo está estructurada</th><th style="width:40%">Patrón que adopta el CIC</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Open edX</strong></td><td>Tres aplicaciones separadas: sitio público o catálogo, LMS (tablero del estudiante + vista de curso con temario y progreso) y Studio para crear contenidos.</td><td><strong>Separar en capas:</strong> Portal público · Campus · Gestión.</td></tr>
+                            <tr><td><strong>Canvas</strong></td><td>Canvas LMS para cursar y Canvas Catalog como vitrina pública con inscripción. Cada curso tiene página de inicio y "Módulos" lineales con prerrequisitos.</td><td><strong>Ruta = módulos con candado</strong>, precedida por una ficha pública.</td></tr>
+                            <tr><td><strong>Moodle</strong></td><td>Página principal, Área personal y "Mis cursos"; dentro del curso, índice lateral (desde la versión 4.0) y marcas de finalización. App con descarga para uso sin conexión.</td><td><strong>Índice lateral + finalización automática</strong> y app para el territorio.</td></tr>
+                            <tr><td><strong>Coursera</strong></td><td>Catálogo → ficha de curso (qué aprenderás, temario, duración, certificado, preguntas) → "Mi aprendizaje" → logros con certificados verificables.</td><td><strong>Ficha de ruta como página de aterrizaje</strong> y verificación pública de constancias.</td></tr>
+                            <tr><td><strong>Khan Academy</strong></td><td>Inicio del estudiante con "continuar"; jerarquía corta curso → unidad → lección → práctica; progreso por dominio.</td><td><strong>Jerarquía de máximo 3 niveles</strong> y práctica corta después de cada video.</td></tr>
+                            <tr><td><strong>Docebo</strong></td><td>Una sola plataforma para varias audiencias (empleados, socios, clientes) con páginas de inicio distintas por rol.</td><td><strong>Entrada por rol:</strong> emprendedora, dinamizadora, aliada.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="rejilla c4 bloque">
+                    <div class="celda"><p class="celda-num">P1</p><h3>Capas separadas</h3><p class="texto">Vitrina pública indexable, campus privado y gestión con permisos.</p><div class="patron-plat"><span class="tag">Open edX</span><span class="tag">Canvas</span></div></div>
+                    <div class="celda"><p class="celda-num">P2</p><h3>Entrada por rol</h3><p class="texto">Cada perfil ve primero lo que le sirve.</p><div class="patron-plat"><span class="tag">Docebo</span><span class="tag">Coursera</span></div></div>
+                    <div class="celda"><p class="celda-num">P3</p><h3>Catálogo → ficha</h3><p class="texto">Toda ruta tiene una página pública que explica qué, para quién y qué se obtiene.</p><div class="patron-plat"><span class="tag">Coursera</span><span class="tag">Canvas Catalog</span></div></div>
+                    <div class="celda"><p class="celda-num">P4</p><h3>"Continuar"</h3><p class="texto">El inicio del campus lleva directo a la siguiente actividad.</p><div class="patron-plat"><span class="tag">Khan</span><span class="tag">Open edX</span></div></div>
+                    <div class="celda"><p class="celda-num">P5</p><h3>Reproductor con temario</h3><p class="texto">Contenido al centro, temario y progreso al lado, botón "siguiente".</p><div class="patron-plat"><span class="tag">Moodle</span><span class="tag">Coursera</span></div></div>
+                    <div class="celda"><p class="celda-num">P6</p><h3>Logros verificables</h3><p class="texto">Insignias y certificados con URL pública de verificación.</p><div class="patron-plat"><span class="tag">Coursera</span><span class="tag">Open Badges</span></div></div>
+                    <div class="celda"><p class="celda-num">P7</p><h3>Centro de ayuda</h3><p class="texto">Cómo ingresar, tutoriales y soporte fuera del campus, accesibles sin sesión.</p><div class="patron-plat"><span class="tag">Moodle Docs</span><span class="tag">Canvas Guides</span></div></div>
+                    <div class="celda lima"><p class="celda-num" style="color:var(--carbon)">P8</p><h3>App con descarga</h3><p class="texto" style="color:var(--carbon)">Estudiar sin datos y sincronizar al reconectar.</p><div class="patron-plat"><span class="tag">Moodle app</span><span class="tag">Khan app</span></div></div>
+                </div>
+            </section>
+
+            <!-- 07 · ESTRUCTURA RECOMENDADA -->
+            <section class="seccion" id="estructura">
+                <div class="rotulo"><span class="num">07</span><span>Estructura web recomendada</span></div>
+                <h2>Tres capas, organizadas por rutas y por roles.</h2>
+                <p class="intro">La estructura del CIC aplica los ocho patrones: un <strong>portal público</strong> que funciona como catálogo de rutas y biblioteca de recursos, un <strong>campus</strong> centrado en completar la ruta y un <strong>panel de gestión</strong> para la Secretaría. Las 7 secciones que pide el Plan de Trabajo (Inicio, Quiénes somos, El proceso, Qué buscamos, Aliados, Video y Acceso) siguen presentes, agrupadas en "Sobre el CIC" y en el inicio.</p>
+
+                <div class="capas bloque">
+                    <div class="capa">
+                        <div><div class="capa-id"><span class="n">1</span><div><h3>Portal público</h3><div class="dom">dominio-cic.org · indexable</div></div></div></div>
+                        <div class="chips">
+                            <span class="chip">Inicio con entrada por rol</span><span class="chip">Rutas de aprendizaje</span><span class="chip">Ficha de cada ruta</span><span class="chip">Biblioteca de recursos</span><span class="chip">Sobre el CIC (modelo, proceso, video)</span><span class="chip">Territorio</span><span class="chip">Aliados</span><span class="chip">Centro de ayuda</span><span class="chip">Verificar constancia</span>
+                        </div>
+                        <p class="texto">HTML estático en Hostinger, versionado en GitHub. Rápido, posicionable y sin datos personales. Patrones P1, P2, P3, P6 y P7.</p>
+                    </div>
+                    <div class="capa">
+                        <div><div class="capa-id"><span class="n">2</span><div><h3>Campus</h3><div class="dom">campus.dominio-cic.org · noindex</div></div></div></div>
+                        <div class="chips">
+                            <span class="chip">Inicio personal + "Continuar"</span><span class="chip">Mis rutas</span><span class="chip">Reproductor con temario</span><span class="chip">Mis logros y constancias</span><span class="chip">Comunidad por satélite</span><span class="chip">Mi satélite (dinamizadoras)</span><span class="chip">App sin conexión</span>
+                        </div>
+                        <p class="texto">Moodle 5.3 LTS con un tema simplificado y la app oficial. Patrones P4, P5, P6 y P8.</p>
+                    </div>
+                    <div class="capa">
+                        <div><div class="capa-id"><span class="n">3</span><div><h3>Gestión</h3><div class="dom">Administración del campus · solo roles autorizados</div></div></div></div>
+                        <div class="chips">
+                            <span class="chip">Registros por aprobar</span><span class="chip">Avance por satélite</span><span class="chip">Reporte semanal</span><span class="chip">Banco de preguntas</span><span class="chip">Biblioteca de medios</span><span class="chip">Constancias</span><span class="chip">CRM por emprendimiento (Módulo 3)</span>
+                        </div>
+                        <p class="texto">Informes y administración de Moodle ahora; el CRM del Módulo 3 se suma después, conectado por API.</p>
+                    </div>
+                </div>
+
+                <!-- WIREFRAME -->
+                <div class="wf-tabs" role="group" aria-label="Cambiar capa del wireframe">
+                    <button class="filtro" data-vista="portal" aria-pressed="true" onclick="switchWireframe('portal')">1 · Portal público</button>
+                    <button class="filtro" data-vista="campus" aria-pressed="false" onclick="switchWireframe('campus')">2 · Campus (móvil)</button>
+                    <button class="filtro" data-vista="gestion" aria-pressed="false" onclick="switchWireframe('gestion')">3 · Gestión</button>
+                </div>
+                <div class="wf-zona">
+                    <div>
+                        <!-- PORTAL -->
+                        <div class="marco" id="wf-portal">
+                            <div class="marco-nav"><i></i><i></i><i></i><span>dominio-cic.org</span></div>
+                            <div class="marco-cuerpo">
+                                <button type="button" class="wf" data-k="p-nav"><span class="wf-t">Navegación · 4 + acceso</span><span class="wf-h">CIC · Rutas · Recursos · Sobre el CIC · Ayuda &nbsp;[Ingresar →]</span></button>
+                                <button type="button" class="wf wf-oscuro" data-k="p-hero"><span class="wf-t">Héroe · propuesta + entrada por rol</span><span class="wf-h">"Aprende, organiza y haz crecer tu negocio"</span><span class="wf-fila"><span>Soy emprendedora</span><span>Soy dinamizadora</span><span>Soy aliada</span></span></button>
+                                <button type="button" class="wf" data-k="p-rutas"><span class="wf-t">Catálogo de rutas</span><span class="wf-h">Gestión del CIC · Ruta HACER · Ruta SER</span><span class="wf-fila"><span>duración</span><span>para quién</span><span>qué obtienes</span></span></button>
+                                <button type="button" class="wf" data-k="p-recursos"><span class="wf-t">Biblioteca de recursos</span><span class="wf-h">Plantillas descargables con filtros por tema</span><span class="wf-fila"><span>Finanzas</span><span>Ventas</span><span>Formalización</span><span>Marketing</span></span></button>
+                                <button type="button" class="wf" data-k="p-modelo"><span class="wf-t">Sobre el CIC · resumen</span><span class="wf-h">Cascada: Secretaría → 8 satélites → 200 emprendedoras &nbsp;▶ video</span></button>
+                                <button type="button" class="wf" data-k="p-cifras"><span class="wf-t">Prueba de impacto + territorio</span><span class="wf-h">200 · 24 · 8 satélites · mapa de 13 municipios</span></button>
+                                <button type="button" class="wf" data-k="p-aliados"><span class="wf-t">Aliados</span><span class="wf-h">Red de Mujeres del Caribe · APRODEFA · financiadores</span></button>
+                                <button type="button" class="wf wf-oscuro" data-k="p-pie"><span class="wf-t">Pie · ayuda y legal</span><span class="wf-h">Centro de ayuda · Verificar constancia · Política de datos · WhatsApp</span></button>
+                            </div>
+                        </div>
+                        <!-- CAMPUS -->
+                        <div id="wf-campus" hidden>
+                            <div class="telefono">
+                                <div class="muesca"></div>
+                                <div class="marco-cuerpo">
+                                    <button type="button" class="wf" data-k="c-login"><span class="wf-t">Ingreso</span><span class="wf-h">Número de cédula · Clave · [Entrar]</span><span class="wf-fila"><span>¿Olvidaste tu clave? WhatsApp</span></span></button>
+                                    <button type="button" class="wf wf-oscuro" data-k="c-continuar"><span class="wf-t">Inicio personal</span><span class="wf-h">Hola, María · Semana 4: Nuevo precio &nbsp;[Continuar ▶]</span></button>
+                                    <button type="button" class="wf" data-k="c-rutas"><span class="wf-t">Mis rutas</span><span class="wf-h">Ruta HACER · 60 %</span><div class="barra"><b style="width:60%"></b></div><span class="wf-h" style="display:block;margin-top:8px">Ruta SER · 25 %</span><div class="barra"><b style="width:25%"></b></div></button>
+                                    <button type="button" class="wf" data-k="c-reproductor"><span class="wf-t">Reproductor + temario</span><span class="wf-h">▶ Video 8–15 min</span><span class="wf-fila"><span>Guía PDF</span><span>Plantilla</span><span>Cuestionario · 2 intentos</span></span></button>
+                                    <button type="button" class="wf" data-k="c-satelite"><span class="wf-t">Mi satélite · dinamizadoras</span><span class="wf-h">Registrar sesión · Subir fotos · Bitácora</span></button>
+                                    <button type="button" class="wf" data-k="c-logros"><span class="wf-t">Mis logros</span><span class="wf-h">Insignias 3/5 · Mi constancia</span></button>
+                                    <button type="button" class="wf wf-oscuro" data-k="c-tabbar"><span class="wf-t">Barra inferior fija</span><span class="wf-h">Inicio · Rutas · Logros · Comunidad · Ayuda</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- GESTIÓN -->
+                        <div class="marco" id="wf-gestion" hidden>
+                            <div class="marco-nav"><i></i><i></i><i></i><span>campus.dominio-cic.org/admin</span></div>
+                            <div class="marco-cuerpo">
+                                <button type="button" class="wf wf-oscuro" data-k="g-resumen"><span class="wf-t">Resumen del ciclo</span><span class="wf-h">Dinamizadoras con curso aprobado 18/24 · Sesiones HACER registradas 412</span></button>
+                                <button type="button" class="wf" data-k="g-registros"><span class="wf-t">Registros por aprobar</span><span class="wf-h">Carga masiva desde la base oficial · 7 pendientes</span></button>
+                                <button type="button" class="wf" data-k="g-satelites"><span class="wf-t">Avance por satélite</span><span class="wf-h">8 satélites · semana actual · alertas de rezago</span><span class="wf-fila"><span>Baranoa</span><span>Cartagena</span><span>Sincelejo</span><span>…</span></span></button>
+                                <button type="button" class="wf" data-k="g-reporte"><span class="wf-t">Reporte semanal</span><span class="wf-h">Generado automáticamente y enviado a la Secretaría</span></button>
+                                <button type="button" class="wf" data-k="g-contenidos"><span class="wf-t">Contenidos</span><span class="wf-h">Banco de preguntas · Biblioteca de videos y grabaciones</span></button>
+                                <button type="button" class="wf" data-k="g-crm"><span class="wf-t">Fase posterior · Módulo 3</span><span class="wf-h">Buscador por cédula del emprendimiento · historial · informe</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="inspector" aria-live="polite">
+                        <span id="inspectBadge" class="tag tag-oscuro">Selecciona un bloque</span>
+                        <h3 id="inspectTitle">Toca cualquier bloque del wireframe</h3>
+                        <p id="inspectDescription" class="texto">Verás su función, el patrón de los LMS pilares en que se basa y las indicaciones técnicas y de SEO.</p>
+                        <div id="inspectSpecs" class="specs"></div>
+                    </aside>
+                </div>
+
+                <!-- MAPA + RECORRIDOS -->
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num">Mapa del sitio · capa pública</p>
+                        <div class="arbol" style="margin-top:12px">dominio-cic.org
+├─ /rutas                    catálogo
+│  ├─ /rutas/gestion-cic     ficha
+│  ├─ /rutas/hacer           ficha
+│  └─ /rutas/ser             ficha
+├─ /recursos                 biblioteca
+│  └─ /recursos/{plantilla}  p. ej. /recursos/punto-equilibrio
+├─ /sobre-cic                modelo · proceso · video
+│  ├─ /sobre-cic/territorio  8 satélites
+│  └─ /sobre-cic/aliados
+├─ /ayuda                    ingreso · tutoriales · contacto
+├─ /verificar                constancias (noindex)
+└─ /politica-datos
+
+campus.dominio-cic.org       (noindex)
+├─ inicio · mis rutas · reproductor
+├─ logros · comunidad · mi satélite
+└─ /admin                    gestión</div>
+                    </div>
+                    <div>
+                        <p class="celda-num">Equivalencia con el Plan de Trabajo (Módulo 1)</p>
+                        <table style="margin-top:12px">
+                            <caption class="sr-only">Secciones del plan y dónde quedan en la nueva estructura</caption>
+                            <thead><tr><th>Sección del plan</th><th>Dónde queda</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Inicio</strong></td><td>/ con entrada por rol y rutas</td></tr>
+                                <tr><td><strong>Quiénes somos</strong></td><td>/sobre-cic</td></tr>
+                                <tr><td><strong>El proceso</strong></td><td>/sobre-cic (cascada) + resumen en el inicio</td></tr>
+                                <tr><td><strong>Qué buscamos</strong></td><td>/sobre-cic (autonomía económica)</td></tr>
+                                <tr><td><strong>Aliados</strong></td><td>/sobre-cic/aliados + franja en el inicio</td></tr>
+                                <tr><td><strong>Video institucional</strong></td><td>/sobre-cic (espacio reservado)</td></tr>
+                                <tr><td><strong>Acceso</strong></td><td>Botón "Ingresar" fijo en la navegación</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="rejilla c4" style="border-top:0">
+                    <div class="celda"><p class="celda-num">Recorrido · Emprendedora</p><ol class="recorrido"><li>Recibe el enlace por WhatsApp de su dinamizadora.</li><li>Entra con su cédula y ve "Continuar semana 1".</li><li>Mira el video, descarga la plantilla y la usa en la sesión.</li><li>Consulta sus logros y su constancia al cerrar la ruta.</li></ol></div>
+                    <div class="celda"><p class="celda-num">Recorrido · Dinamizadora</p><ol class="recorrido"><li>Aprueba los 5 módulos del curso de gestión.</li><li>Antes de cada semana revisa la guía de facilitación.</li><li>Registra la sesión y sube fotos desde "Mi satélite".</li><li>Pregunta en la comunidad y recibe su constancia.</li></ol></div>
+                    <div class="celda"><p class="celda-num">Recorrido · Secretaría</p><ol class="recorrido"><li>Carga las usuarias desde la base oficial.</li><li>Revisa el avance por satélite y las alertas.</li><li>Recibe el reporte semanal automático.</li><li>Ajusta contenidos y preguntas para el siguiente ciclo.</li></ol></div>
+                    <div class="celda crema"><p class="celda-num">Recorrido · Aliada o visitante</p><ol class="recorrido"><li>Llega desde Google o redes a una ruta o recurso.</li><li>Entiende el modelo en "Sobre el CIC".</li><li>Descarga una plantilla de la biblioteca.</li><li>Contacta al CIC o verifica una constancia.</li></ol></div>
+                </div>
+
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num">Stack técnico</p>
+                        <table style="margin-top:10px"><tbody>
+                            <tr><td><strong>Portal</strong></td><td>HTML/CSS/JS estático (o generador estático) en Hostinger, versionado en GitHub, con HTTPS y caché.</td></tr>
+                            <tr><td><strong>Campus</strong></td><td>Moodle 5.3 LTS en VPS. Desde Moodle 5.2 se requiere PHP 8.3 o superior; base de datos MariaDB 10.11+, MySQL 8.4+ o PostgreSQL.</td></tr>
+                            <tr><td><strong>Video</strong></td><td>YouTube no listado (modo privacidad) o H5P; Google Drive solo para descargables.</td></tr>
+                            <tr><td><strong>Datos personales</strong></td><td>Autorización previa, expresa e informada al activar la cuenta (Ley 1581 de 2012) y política de tratamiento publicada.</td></tr>
+                        </tbody></table>
+                    </div>
+                    <div class="lima">
+                        <p class="celda-num" style="color:var(--carbon)">Qué cambia frente a una web institucional</p>
+                        <ul style="margin-top:10px;padding-left:18px;font-size:15px">
+                            <li>La navegación principal habla de <strong>aprender</strong> (rutas, recursos, ayuda), no de la institución.</li>
+                            <li>El inicio hace una sola pregunta: <strong>¿quién eres?</strong>, y lleva a cada rol a su camino.</li>
+                            <li>Cada ruta tiene una <strong>ficha pública</strong> que posiciona en Google y explica el valor antes del login.</li>
+                            <li>Las plantillas se vuelven <strong>páginas indexables</strong>: la caja de herramientas atrae tráfico orgánico y queda después del proyecto.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 08 · UX Y EMBUDO -->
+            <section class="seccion" id="ux">
+                <div class="rotulo"><span class="num">08</span><span>UX y embudo de aprendizaje</span></div>
+                <h2>Cada clic de más es una deserción potencial.</h2>
+                <p class="intro">Las guías de evaluación de LMS de 2026 coinciden en que <strong>la adopción decide si una plataforma funciona</strong>, más que la cantidad de funciones. Patrones tomados de Canvas, Moodle 5, Coursera, Khan Academy y TalentLMS, adaptados al perfil del CIC.</p>
+
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num" style="color:var(--alerta)">✕ Anti-patrón (LMS tradicional)</p>
+                        <ul class="texto" style="margin-top:10px;padding-left:18px">
+                            <li><strong>Tablero saturado:</strong> calendario, noticias, mensajes y cursos compiten en la primera pantalla.</li>
+                            <li><strong>Lenguaje técnico:</strong> "matricularse", "recurso SCORM", "calificador".</li>
+                            <li><strong>Videos largos desde Drive:</strong> cortes por límite de reproducciones y sin saber si se vieron.</li>
+                            <li><strong>Correos y claves complejas obligatorias:</strong> muchas usuarias casi no usan correo.</li>
+                            <li><strong>Diseño para escritorio:</strong> tablas y menús que no caben en un celular de gama baja.</li>
+                        </ul>
+                    </div>
+                    <div class="crema">
+                        <p class="celda-num">● Práctica de excelencia (propuesta CIC)</p>
+                        <ul class="texto" style="margin-top:10px;padding-left:18px">
+                            <li><strong>Un botón protagonista:</strong> "Continuar donde lo dejé".</li>
+                            <li><strong>Lenguaje claro:</strong> "Mis rutas", "Mi avance", "Mis herramientas", "Mi constancia".</li>
+                            <li><strong>Módulos lineales con candado:</strong> el siguiente se abre al aprobar el anterior.</li>
+                            <li><strong>Ingreso con cédula</strong> y recuperación asistida por la dinamizadora o por WhatsApp.</li>
+                            <li><strong>Móvil primero:</strong> texto de 16 px o más; áreas táctiles de al menos 24 px (mínimo WCAG 2.2 AA), idealmente 44–48 px; contraste AA y barra de navegación inferior.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="oscuro bloque" style="padding:0">
+                    <div style="padding:24px 20px 4px"><p class="celda-num">Embudo de aprendizaje: del primer ingreso a la constancia</p></div>
+                    <div class="embudo">
+                        <div><p class="celda-num">01</p><h4>Acceso</h4><p>Cuenta ya creada con su cédula; bienvenida por WhatsApp con el enlace.</p></div>
+                        <div><p class="celda-num">02</p><h4>Primer módulo</h4><p>Video corto y una victoria temprana: primera insignia en menos de 20 minutos.</p></div>
+                        <div><p class="celda-num">03</p><h4>Continuidad</h4><p>"Continuar" siempre visible, recordatorios ligados a la semana de la ruta y avance en porcentaje.</p></div>
+                        <div><p class="celda-num">04</p><h4>Evaluación</h4><p>Dos intentos con retroalimentación; al bloqueo, el sistema indica qué video repasar.</p></div>
+                        <div><p class="celda-num">05</p><h4>Constancia</h4><p>Emisión automática al cumplir requisitos, con código verificable.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 09 · RENDIMIENTO -->
+            <section class="seccion" id="rendimiento">
+                <div class="rotulo"><span class="num">09</span><span>Rendimiento y conectividad</span></div>
+                <h2>Cada megabyte cuesta datos que ellas pagan.</h2>
+                <p class="intro">Los Core Web Vitals son una señal de experiencia de página para Google y, para el CIC, una cuestión de acceso: el 56,9 % de los hogares rurales tiene internet y en zonas rurales predomina la conexión móvil (62,1 % frente a 40,7 % urbano, DANE ECV 2025). Ajusta las métricas para ver el diagnóstico.</p>
+
+                <div class="rejilla c3 bloque">
+                    <div class="metrica">
+                        <label for="lcpSlider">LCP · carga del contenido principal</label>
+                        <div class="valor" id="lcpVal">1.8 s</div>
+                        <input type="range" id="lcpSlider" min="0.8" max="6.0" step="0.1" value="1.8" oninput="updateCWVDiagnostic()">
+                        <div class="estado" id="lcpStatus"></div>
+                    </div>
+                    <div class="metrica">
+                        <label for="clsSlider">CLS · estabilidad visual</label>
+                        <div class="valor" id="clsVal">0.04</div>
+                        <input type="range" id="clsSlider" min="0.00" max="0.40" step="0.01" value="0.04" oninput="updateCWVDiagnostic()">
+                        <div class="estado" id="clsStatus"></div>
+                    </div>
+                    <div class="metrica">
+                        <label for="inpSlider">INP · respuesta a toques</label>
+                        <div class="valor" id="inpVal">110 ms</div>
+                        <input type="range" id="inpSlider" min="50" max="600" step="10" value="110" oninput="updateCWVDiagnostic()">
+                        <div class="estado" id="inpStatus"></div>
+                    </div>
+                </div>
+                <div class="rejilla c2" style="border-top:0">
+                    <div style="grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+                        <div id="cwvOverallBadge" class="cwv-estado est-bueno">Estado: óptimo</div>
+                        <div id="cwvRemediation" class="texto" style="flex:1 1 240px;min-width:0"></div>
+                    </div>
+                </div>
+
+                <div class="desplazable bloque">
+                    <table class="t-min">
+                        <caption class="sr-only">Opciones de alojamiento de video</caption>
+                        <thead><tr><th>Opción de video</th><th>Calidad adaptable</th><th>¿Se sabe si lo vio completo?</th><th>Observación</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Google Drive (plan actual)</strong></td><td>Limitada</td><td class="no">No</td><td>Límite diario variable de reproducciones ("número de reproducciones permitidas excedido"). No apto como reproductor principal.</td></tr>
+                            <tr><td><strong>YouTube no listado</strong></td><td class="ok">Sí</td><td class="ok">Sí, con la API IFrame</td><td>Gratis y con ajuste automático de calidad. Usar el modo de privacidad mejorada (youtube-nocookie.com); puede sugerir otros videos al final.</td></tr>
+                            <tr><td><strong>H5P Video interactivo</strong></td><td>Según la fuente</td><td class="ok">Sí, vía xAPI</td><td>Preguntas dentro del video y cuestionario condicionado a verlo completo.</td></tr>
+                            <tr><td><strong>Descarga en la app del LMS</strong></td><td>—</td><td>Se sincroniza al reconectar</td><td>Descargar con Wi-Fi en la sede del satélite y ver luego sin gastar datos.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="nota">Presupuesto sugerido: páginas públicas de 1 MB o menos en móvil, videos de 8–15 minutos (como indican los guiones del curso) y subtítulos.</p>
+            </section>
+
+            <!-- 10 · SEO TÉCNICO -->
+            <section class="seccion" id="seo">
+                <div class="rotulo"><span class="num">10</span><span>SEO técnico</span></div>
+                <h2>Lo público se posiciona; lo privado no se indexa.</h2>
+                <p class="intro">El valor orgánico del CIC está en las <strong>fichas de rutas y las plantillas de la biblioteca</strong> (búsquedas como "plantilla punto de equilibrio" o "registro diario de ventas"). El campus y la verificación de constancias quedan fuera del índice para proteger los datos de las participantes.</p>
+
+                <p class="subtitulo bloque" style="font-family:var(--display);font-weight:700">Metatítulos y metadescripciones por página</p>
+                <div class="desplazable">
+                    <table class="t-min">
+                        <caption class="sr-only">Metadatos recomendados por página del portal del CIC</caption>
+                        <thead><tr><th>Página</th><th>URL</th><th>Meta título</th><th>Meta descripción</th></tr></thead>
+                        <tbody id="metaTableBody"></tbody>
+                    </table>
+                </div>
+                <p class="nota">Títulos de 60 caracteres o menos y descripciones de 155 o menos (el contador lo valida). Ningún título se repite y el H1 de cada página usa una redacción distinta.</p>
+
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num">URLs limpias</p>
+                        <table style="margin-top:10px"><tbody>
+                            <tr><td class="no">✕</td><td><code>/index.php?page=ruta_hacer&amp;id=2</code></td></tr>
+                            <tr><td class="ok"></td><td><code>/rutas/hacer</code></td></tr>
+                            <tr><td class="no">✕</td><td><code>/la-caja-de-herramientas-de-la-emprendedora</code></td></tr>
+                            <tr><td class="ok"></td><td><code>/recursos</code></td></tr>
+                            <tr><td class="no">✕</td><td><code>/Recursos/Plantilla_Punto_Equilibrio_2026.pdf</code></td></tr>
+                            <tr><td class="ok"></td><td><code>/recursos/punto-equilibrio</code></td></tr>
+                        </tbody></table>
+                        <p class="nota">Minúsculas y guiones; sin tildes, eñes, fechas, IDs ni conectores ("el", "la", "de", "y"). Cada PDF vive dentro de una página HTML que lo explica.</p>
+                    </div>
+                    <div>
+                        <p class="celda-num">Interlinkeado por clústeres</p>
+                        <div class="arbol" style="margin-top:12px">Inicio
+├─ Rutas            (clúster: Aprender)
+│  ├─ Gestión del CIC
+│  ├─ Ruta HACER ──→ enlaza a sus plantillas
+│  └─ Ruta SER
+├─ Recursos         (clúster: Herramientas)
+│  └─ cada plantilla ──→ enlaza a su semana de ruta
+├─ Sobre el CIC     (clúster: Institucional)
+│  ├─ Territorio
+│  └─ Aliados
+└─ Ayuda · Política de datos</div>
+                        <p class="nota">Texto ancla descriptivo, nunca "clic aquí". Rutas y recursos se enlazan en ambos sentidos.</p>
+                    </div>
+                </div>
+
+                <!-- SCHEMA -->
+                <div class="codigo bloque">
+                    <p class="celda-num" style="color:var(--lima)">Inspector JSON-LD · datos estructurados para el portal del CIC</p>
+                    <div class="filtros" role="group" aria-label="Elegir entidad Schema.org" style="margin-top:14px">
+                        <button class="filtro" data-sch="org" aria-pressed="true" onclick="toggleSchemaEntity('org')">Organización</button>
+                        <button class="filtro" data-sch="course" aria-pressed="false" onclick="toggleSchemaEntity('course')">Ruta (Course)</button>
+                        <button class="filtro" data-sch="recurso" aria-pressed="false" onclick="toggleSchemaEntity('recurso')">Plantilla (LearningResource)</button>
+                        <button class="filtro" data-sch="breadcrumb" aria-pressed="false" onclick="toggleSchemaEntity('breadcrumb')">Migas de pan</button>
+                    </div>
+                    <pre id="schemaCodeBlock" style="margin-top:16px"></pre>
+                    <div class="aviso" id="schemaNote"></div>
+                </div>
+
+                <!-- INDEXACIÓN -->
+                <div class="rejilla c3 bloque">
+                    <div>
+                        <p class="celda-num">robots.txt · dominio principal</p>
+                        <div class="arbol" style="margin-top:10px;font-size:11.5px">User-agent: *
+Allow: /
+
+Sitemap: https://www.dominio-cic.org/sitemap.xml</div>
+                    </div>
+                    <div>
+                        <p class="celda-num">sitemap.xml · solo páginas públicas</p>
+                        <div class="arbol" style="margin-top:10px;font-size:11.5px">/
+/rutas
+/rutas/gestion-cic
+/rutas/hacer
+/rutas/ser
+/recursos
+/recursos/punto-equilibrio
+/sobre-cic
+/sobre-cic/territorio
+/sobre-cic/aliados
+/ayuda
+/politica-datos</div>
+                    </div>
+                    <div>
+                        <p class="celda-num">llms.txt · opcional</p>
+                        <div class="arbol" style="margin-top:10px;font-size:11.5px"># Centro de Innovación
+  Comunitario (CIC)
+&gt; Formación para la
+  autonomía económica de
+  mujeres del Caribe.
+
+## Páginas clave
+- Rutas: /rutas
+- Recursos: /recursos
+- Sobre el CIC: /sobre-cic
+- Ayuda: /ayuda</div>
+                    </div>
+                </div>
+                <div class="aviso-claro"><strong>Cómo sacar del índice lo privado (corregido):</strong> no uses <code>Disallow</code> en robots.txt para lo que quieres desindexar. Si Google no puede rastrear la página, nunca verá la etiqueta <code>noindex</code> y la URL puede seguir apareciendo. En su lugar, el campus completo envía la cabecera <code>X-Robots-Tag: noindex, nofollow</code> y la página <code>/verificar</code> lleva <code>&lt;meta name="robots" content="noindex"&gt;</code>. Sobre <code>llms.txt</code>: Google no lo usa para Search; es opcional y de bajo costo, y algunos agentes de IA lo consultan.</div>
+
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num">Configurar Google Analytics 4</p>
+                        <ol class="texto" style="margin-top:10px;padding-left:18px">
+                            <li>Crear la propiedad GA4 y copiar el Measurement ID (G-XXXXXXXXXX).</li>
+                            <li>Reemplazar el ID de ejemplo en el snippet <code>gtag.js</code> del <code>&lt;head&gt;</code>.</li>
+                            <li>Eventos clave: <em>clic_ingresar_campus</em>, <em>seleccion_rol</em>, <em>descarga_recurso</em>, <em>reproduccion_video</em>, <em>clic_whatsapp</em>.</li>
+                            <li>Banner de consentimiento; nunca enviar cédulas, nombres ni datos del campus a GA4.</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <p class="celda-num">Configurar Google Search Console</p>
+                        <ol class="texto" style="margin-top:10px;padding-left:18px">
+                            <li>Propiedad de dominio verificada por DNS (cubre también el subdominio del campus).</li>
+                            <li>Reemplazar el <code>google-site-verification</code> de ejemplo si se usa verificación por etiqueta.</li>
+                            <li>Enviar <code>sitemap.xml</code> en Sitemaps.</li>
+                            <li>Revisar cada semana indexación, Core Web Vitals y que ninguna URL del campus aparezca indexada.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11 · FAQ -->
+            <section class="seccion faq" id="faq">
+                <div class="rotulo"><span class="num">11</span><span>Preguntas frecuentes</span></div>
+                <h2>Borrador de preguntas para el centro de ayuda.</h2>
+                <p class="intro">Redactadas con las palabras que usarían las participantes y los aliados. Deben validarse con la Secretaría Técnica. Desde mayo de 2026 Google ya no muestra resultados enriquecidos de FAQ; su valor está en resolver dudas y en ser citables por buscadores con IA.</p>
+                <div class="bloque" style="border-top:1px solid var(--linea-fuerte)">
+                    <details><summary><h3>¿Qué es el Centro de Innovación Comunitario (CIC)?</h3></summary><p>Es un centro para la autonomía económica de las mujeres del Caribe colombiano que funciona en red con la Red de Mujeres del Caribe: una Secretaría Técnica, 8 satélites territoriales y 24 dinamizadoras acompañan a emprendedoras en su negocio y en su desarrollo personal.</p></details>
+                    <details><summary><h3>¿Quién puede ingresar a la plataforma de formación?</h3></summary><p>Las emprendedoras, dinamizadoras y secretarias vinculadas al proyecto. El acceso se habilita con el número de cédula, verificado contra la base oficial de vinculación.</p></details>
+                    <details><summary><h3>¿Puedo estudiar desde el celular y sin datos?</h3></summary><p>Sí. La plataforma está pensada para el celular, con videos cortos y materiales descargables, y la app permite descargar contenidos con Wi-Fi para verlos luego. El proyecto contempla paquetes de datos para facilitar el acceso.</p></details>
+                    <details><summary><h3>¿Qué recibo al terminar?</h3></summary><p>Una constancia de participación expedida por la plataforma. Las dinamizadoras deben aprobar los 5 módulos del curso de gestión con al menos 70 %; las emprendedoras deben completar las 6 semanas de la ruta HACER, al menos 3 de los 4 talleres SER y su portafolio de evidencias.</p></details>
+                    <details><summary><h3>¿En qué municipios está presente el CIC?</h3></summary><p>En 13 municipios de 7 departamentos: Baranoa y Campo de la Cruz (Atlántico), Cartagena y María la Baja (Bolívar), Sincelejo y Tolú (Sucre), Montería y Tierra Alta (Córdoba), Santa Marta (Magdalena), Valledupar y Pueblo Bello (Cesar), y Riohacha y Albania (La Guajira).</p></details>
+                    <details><summary><h3>¿Qué aprenden las emprendedoras en la ruta HACER-SER?</h3></summary><p>Costos y finanzas básicas, comercialización, administración y planeación (ruta HACER, 6 semanas de acompañamiento individual), y habilidades socioemocionales, liderazgo y derechos (ruta SER, 4 talleres grupales). En total son 28 horas de formación directa.</p></details>
+                </div>
+            </section>
+
+            <!-- FUENTES -->
+            <section class="seccion" id="fuentes">
+                <div class="rotulo"><span class="num">→</span><span>Fuentes</span></div>
+                <div class="rejilla c2 bloque">
+                    <div>
+                        <p class="celda-num">Documentos del proyecto</p>
+                        <ul class="texto" style="margin-top:10px;padding-left:18px">
+                            <li>Plan de Trabajo: Plataforma Web CIC (Sitio + Formación + Seguimiento), 26 sep 2026.</li>
+                            <li>6.4 Documento técnico y metodológico de los procesos formativos (Final), agosto 2026.</li>
+                            <li>6.5 Documento final Modelo Metodológico CIC.</li>
+                            <li>Guía de estudio del curso de gestión del CIC.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="celda-num">Mercado, plataformas y técnica</p>
+                        <ul class="texto" style="margin-top:10px;padding-left:18px">
+                            <li><a href="https://listedtech.com/blog/beyond-the-logos-the-multidimensional-spanish-speaking-lms-market/" target="_blank" rel="noopener">ListEdTech – Mercado LMS hispanohablante</a></li>
+                            <li><a href="https://onedtech.philhillaa.com/p/state-of-higher-ed-lms-market-for-us-and-canada-year-end-2024-edition" target="_blank" rel="noopener">Phil Hill – LMS EE. UU./Canadá 2024</a> · <a href="https://onedtech.philhillaa.com/p/the-new-blackboard-emerges-from-bankruptcy" target="_blank" rel="noopener">Blackboard tras la quiebra</a></li>
+                            <li><a href="https://stats.moodle.org/" target="_blank" rel="noopener">Estadísticas de Moodle</a> · <a href="https://moodledev.io/general/releases" target="_blank" rel="noopener">Calendario de versiones de Moodle</a></li>
+                            <li><a href="https://docs.moodle.org/501/en/cPanel_Shared_Hosting_Installation" target="_blank" rel="noopener">MoodleDocs – hosting compartido</a> · <a href="https://docs.moodle.org/502/en/Moodle_app_offline_features" target="_blank" rel="noopener">App sin conexión</a></li>
+                            <li><a href="https://docs.openedx.org/en/latest/developers/references/developer_guide/architecture.html" target="_blank" rel="noopener">Arquitectura de Open edX</a></li>
+                            <li><a href="https://www.moodlecloud.com/standard-plans/" target="_blank" rel="noopener">MoodleCloud – planes</a> · <a href="https://www.ispring.com/knowledge-hub/lms-evaluation" target="_blank" rel="noopener">iSpring – evaluación de LMS</a></li>
+                            <li><a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing" target="_blank" rel="noopener">Google – bloquear la indexación con noindex</a></li>
+                            <li><a href="https://ppc.land/google-deprecates-seven-structured-data-types-to-simplify-search-results/" target="_blank" rel="noopener">Google retira 7 tipos de datos estructurados (2025)</a> · <a href="https://www.searchenginejournal.com/google-drops-faq-rich-results-from-search/574429/" target="_blank" rel="noopener">Fin de los resultados FAQ (2026)</a></li>
+                            <li><a href="https://blog.mediazilla.com/blog/stop-using-google-drive-for-video-delivery" target="_blank" rel="noopener">Límites de video en Google Drive</a></li>
+                            <li><a href="https://www.mintic.gov.co/portal/715/w3-article-438459.html" target="_blank" rel="noopener">MinTIC – conectividad rural 2025</a> · <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981" target="_blank" rel="noopener">Ley 1581 de 2012</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- PIE -->
+    <footer class="pie">
+        <div class="logo" aria-label="2H.O">2H<span class="punto"></span>O</div>
+        <div class="pie-sub">ESTUDIO DIGITAL</div>
+        <p class="pie-lema">De idea <span>a web.</span></p>
+        <p class="mono" style="margin-top:28px;color:var(--gris-2)">Estrategia · Diseño · Desarrollo · Resultados — Benchmarking LMS para el CIC · Septiembre 2026</p>
+    </footer>
+
+    <!-- CTA MÓVIL -->
+    <nav class="cta-movil" aria-label="Accesos rápidos">
+        <a href="#matriz" class="btn btn-linea">Matriz</a>
+        <a href="#estructura" class="btn btn-lima">Estructura <span class="flecha">→</span></a>
+    </nav>
+
+    <script>
+        // ================= REFERENTES =================
+        const benchmarkData = [
+            { type: 'opensource', name: 'Moodle', origin: 'Global · Australia', dato: '74 % de instituciones hispanohablantes', url: 'https://moodle.org/', tag: 'Open source',
+              desc: '147.114 sitios registrados en 236 países. Cuestionarios con intentos y nota mínima, restricciones de acceso, Open Badges nativo, índice lateral del curso, app con modo sin conexión e IA desde la versión 5.0.',
+              lesson: 'Cubre de serie casi todo el inventario funcional del CIC.' },
+            { type: 'opensource', name: 'Chamilo', origin: 'Bélgica · comunidad hispana', dato: '2 % del mercado hispano', url: 'https://chamilo.org/', tag: 'Open source',
+              desc: 'Heredero de Dokeos, popular en Latinoamérica. La versión 2.0 trae interfaz renovada, compatibilidad con PHP 8.2/8.3 e IA. Liviano y apto para hosting compartido.',
+              lesson: 'Plan B ligero si no hay VPS; ecosistema más pequeño.' },
+            { type: 'opensource', name: 'Open edX', origin: 'Global · EE. UU.', dato: '+140 millones de estudiantes', url: 'https://openedx.org/', tag: 'Open source',
+              desc: 'Motor de cursos masivos (MOOC). Separa sitio público, LMS y Studio. Muy pesado para el CIC: alrededor de 16 GB de RAM en producción para unos 300 usuarios activos.',
+              lesson: 'Copiar su arquitectura por capas y su patrón "video + pregunta", no su infraestructura.' },
+            { type: 'saas', name: 'Canvas', origin: 'EE. UU. · Instructure', dato: '50 % de matrícula en EE. UU./Canadá', url: 'https://www.instructure.com/canvas', tag: 'SaaS · núcleo AGPL',
+              desc: 'La interfaz más limpia del segmento académico. Sus "Módulos" lineales con prerrequisitos guían paso a paso; Canvas Catalog funciona como vitrina pública.',
+              lesson: 'Módulos con candado y vitrina pública separada del LMS.' },
+            { type: 'saas', name: 'D2L Brightspace', origin: 'Canadá', dato: '20 % de matrícula en EE. UU./Canadá', url: 'https://www.d2l.com/', tag: 'SaaS',
+              desc: 'Creció en 2024 con migraciones de sistemas universitarios completos (SUNY, CUNY). Destaca en analítica de aprendizaje y accesibilidad.',
+              lesson: 'Tableros de avance claros para la Secretaría Técnica.' },
+            { type: 'saas', name: 'TalentLMS', origin: 'Grecia · EE. UU.', dato: 'G2 4,6/5', url: 'https://www.talentlms.com/', tag: 'SaaS · pymes',
+              desc: 'Implementación en días y curva de aprendizaje mínima. Plan gratuito de 5 usuarios y 10 cursos; los planes pagos son mensuales y recurrentes.',
+              lesson: 'Referente de simplicidad; el costo recurrente complica la sostenibilidad posproyecto.' },
+            { type: 'saas', name: 'Docebo', origin: 'Canadá · Italia', dato: 'G2 4,3/5', url: 'https://www.docebo.com/', tag: 'SaaS · enterprise',
+              desc: 'Varias audiencias (empleados, socios, clientes) en una plataforma, con páginas de inicio distintas por rol.',
+              lesson: 'Entrada por rol: justo el caso de los 3 perfiles del CIC.' },
+            { type: 'saas', name: 'Coursera', origin: 'EE. UU.', dato: 'Referente de UX de aprendizaje', url: 'https://www.coursera.org/', tag: 'Plataforma MOOC',
+              desc: 'Catálogo, fichas de curso muy completas, "Mi aprendizaje" con botón para continuar y certificados verificables por URL.',
+              lesson: 'Ficha pública por ruta y verificación de constancias.' },
+            { type: 'wordpress', name: 'LearnDash', origin: 'EE. UU.', dato: 'USD 199/año', url: 'https://www.learndash.com/', tag: 'Plugin WordPress',
+              desc: 'La lógica de cuestionarios más flexible y plantillas de certificado limpias dentro del ecosistema WordPress.',
+              lesson: 'Viable si portal y LMS deben vivir en un mismo hosting compartido.' },
+            { type: 'wordpress', name: 'Tutor LMS', origin: 'Bangladés · Themeum', dato: 'Licencia vitalicia disponible', url: 'https://tutorlms.com/', tag: 'Plugin WordPress',
+              desc: 'Constructor visual de cursos para personas sin conocimientos técnicos y certificados incluidos.',
+              lesson: 'Permite que la Secretaría edite contenidos sin desarrollador.' },
+            { type: 'social', name: 'Zajuna · SENA', origin: 'Colombia', dato: 'Campus nacional sobre Moodle', url: 'https://zajuna.sena.edu.co/', tag: 'Referente público',
+              desc: 'Campus virtual del SENA desde 2025, basado en Moodle. Ingreso con tipo y número de documento; formación gratuita a escala nacional.',
+              lesson: 'Valida el ingreso por cédula y Moodle en el contexto colombiano.' },
+            { type: 'social', name: 'iNNpulsa Mujeres', origin: 'Colombia', dato: '5.900 emprendedoras (2026)', url: 'https://innpulsamujeres.com/', tag: 'Emprendimiento femenino',
+              desc: 'Programa del Gobierno con asistencia técnica personalizada, formación virtual certificada y circuitos comerciales para la economía popular.',
+              lesson: 'Acompañamiento humano + formación virtual certificada, como la cascada del CIC.' },
+            { type: 'social', name: 'TodasConectadas', origin: 'Latinoamérica', dato: 'ONU Mujeres · Microsoft · Mastercard', url: 'https://todasconectadas.org/', tag: 'Recursos abiertos',
+              desc: 'Espacio colaborativo con formación gratuita para el emprendimiento, redes de comunidad e información de inclusión financiera.',
+              lesson: 'Modelo para la biblioteca pública de recursos.' },
+            { type: 'social', name: 'Khan Academy', origin: 'Global · en español', dato: 'ONG educativa', url: 'https://es.khanacademy.org/', tag: 'Aprendizaje por dominio',
+              desc: 'Videos cortos, práctica inmediata, progreso por dominio y jerarquía curso → unidad → lección; muy usable desde el celular.',
+              lesson: 'Micro-videos seguidos de práctica corta, ideal para la ruta HACER.' }
+        ];
+        const typeLabels = { opensource: 'Open source', saas: 'SaaS / académico', wordpress: 'WordPress', social: 'Social / Colombia' };
+
+        function renderBenchmarking(filter) {
+            const cont = document.getElementById('benchmarkContainer');
+            const items = filter === 'all' ? benchmarkData : benchmarkData.filter(i => i.type === filter);
+            cont.innerHTML = items.map(i => `
+                <details class="ref">
+                    <summary>
+                        <span class="ref-nombre">${i.name} <span class="tag">${typeLabels[i.type]}</span></span>
+                        <span class="ref-dato">${i.origin} · <strong style="color:var(--carbon)">${i.dato}</strong></span>
+                        <span class="ref-leccion"><b>Lección</b>${i.lesson}</span>
+                        <span class="ref-mas" aria-hidden="true">+</span>
+                    </summary>
+                    <div class="ref-cuerpo">
+                        <p>${i.desc}</p>
+                        <a href="${i.url}" target="_blank" rel="noopener">Visitar ${i.name} ↗</a>
+                    </div>
+                </details>`).join('');
+        }
+        function filterBenchmark(type) {
+            document.querySelectorAll('[data-filtro]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filtro === type)));
+            renderBenchmarking(type);
+        }
+
+        // ================= MATRIZ =================
+        const matrixOptions = [
+            { key: 'moodle', name: 'Moodle (VPS)' },
+            { key: 'moodlecloud', name: 'MoodleCloud' },
+            { key: 'chamilo', name: 'Chamilo' },
+            { key: 'wordpress', name: 'WordPress + LMS' },
+            { key: 'firebase', name: 'Propio (Firebase)' },
+            { key: 'talentlms', name: 'TalentLMS' }
+        ];
+        const defaultWeights = [20, 20, 15, 15, 10, 10, 10];
+        const matrixCriteria = [
+            { name: 'Cumplimiento funcional', hint: 'Cuestionarios con bloqueo, constancias, foros, asistencia, evidencias', scores: { moodle: 5, moodlecloud: 4, chamilo: 4, wordpress: 3, firebase: 3, talentlms: 3 } },
+            { name: 'Facilidad de uso', hint: 'Usuarias con baja alfabetización digital', scores: { moodle: 3, moodlecloud: 3, chamilo: 3, wordpress: 4, firebase: 5, talentlms: 5 } },
+            { name: 'Móvil y baja conectividad', hint: 'App, modo sin conexión, peso de páginas', scores: { moodle: 5, moodlecloud: 5, chamilo: 3, wordpress: 3, firebase: 4, talentlms: 4 } },
+            { name: 'Tiempo hasta el 27 nov', hint: 'Configurar vs. construir', scores: { moodle: 4, moodlecloud: 5, chamilo: 3, wordpress: 4, firebase: 2, talentlms: 5 } },
+            { name: 'Costo total (TCO)', hint: 'Licencias, hosting, mantenimiento', scores: { moodle: 4, moodlecloud: 3, chamilo: 5, wordpress: 4, firebase: 5, talentlms: 1 } },
+            { name: 'Integración con seguimiento', hint: 'Módulo 3, API, datos por emprendimiento', scores: { moodle: 3, moodlecloud: 2, chamilo: 3, wordpress: 3, firebase: 5, talentlms: 2 } },
+            { name: 'Sostenibilidad posproyecto', hint: 'Caja de herramientas permanente sin depender del equipo', scores: { moodle: 5, moodlecloud: 3, chamilo: 4, wordpress: 4, firebase: 2, talentlms: 2 } }
+        ];
+        const optionNotes = {
+            moodle: 'Trae de serie cuestionarios con intentos y nota mínima, restricciones, foros, tareas con fotos, insignias e informes; asistencia y constancias con plugins gratuitos. App oficial sin conexión. Riesgo: interfaz densa, exige un tema simplificado.',
+            moodlecloud: 'Moodle administrado por Moodle HQ. Para ~230 usuarias aplica el plan de 500 usuarios (USD 1.200/año). No permite instalar plugins y depende de renovar cada año.',
+            chamilo: 'Ligero, en español y apto para hosting compartido. Menor ecosistema de plugins y app menos madura.',
+            wordpress: 'Portal y LMS en el mismo hosting, con buena edición. El bloqueo por nota, la asistencia y los reportes requieren add-ons o código; la seguridad depende de mantener los plugins.',
+            firebase: 'Máxima simplicidad e integración natural con el futuro CRM. Todo se construye en ~8 semanas y el mantenimiento depende del desarrollador.',
+            talentlms: 'La más fácil de usar y lanzar. Costo mensual recurrente, datos en un tercero y continuidad sujeta a seguir pagando.'
+        };
+        let weights = [...defaultWeights];
+        let matrixChart;
+
+        function computeTotals() {
+            const sumW = weights.reduce((a, b) => a + b, 0) || 1;
+            return matrixOptions.map(o => Math.round(matrixCriteria.reduce((acc, c, i) => acc + weights[i] * c.scores[o.key], 0) / (sumW * 5) * 100));
+        }
+        function renderMatrix() {
+            document.getElementById('matrixHead').innerHTML = `<tr><th>Criterio</th><th>Peso</th>${matrixOptions.map(o => `<th style="text-align:center">${o.name}</th>`).join('')}</tr>`;
+            document.getElementById('matrixBody').innerHTML = matrixCriteria.map((c, i) => `
+                <tr>
+                    <td><strong>${c.name}</strong><br><span style="font-size:12px">${c.hint}</span></td>
+                    <td><div class="peso"><input type="range" min="0" max="30" value="${weights[i]}" oninput="updateWeight(${i}, this.value)" aria-label="Peso de ${c.name}"><output id="w-${i}">${weights[i]}</output></div></td>
+                    ${matrixOptions.map(o => `<td style="text-align:center"><span class="puntaje p${c.scores[o.key]}">${c.scores[o.key]}</span></td>`).join('')}
+                </tr>`).join('');
+            renderTotals();
+        }
+        function renderTotals() {
+            const totals = computeTotals();
+            const max = Math.max(...totals);
+            const sumW = weights.reduce((a, b) => a + b, 0);
+            document.getElementById('matrixFoot').innerHTML = `<tr><th scope="row" style="color:var(--blanco)">Total /100</th><td style="font-size:11px">Σ pesos ${sumW}</td>${totals.map(t => `<td class="${t === max ? 'ganador' : ''}">${t}</td>`).join('')}</tr>`;
+            document.getElementById('matrixWinner').textContent = 'Mayor puntaje: ' + matrixOptions.filter((o, i) => totals[i] === max).map(o => o.name).join(' / ');
+            if (matrixChart) {
+                matrixChart.data.datasets[0].data = totals;
+                matrixChart.data.datasets[0].backgroundColor = totals.map(t => t === max ? '#D7F23A' : '#12130E');
+                matrixChart.update();
+            }
+        }
+        function updateWeight(i, v) { weights[i] = parseInt(v, 10); document.getElementById('w-' + i).textContent = weights[i]; renderTotals(); }
+        function resetWeights() { weights = [...defaultWeights]; renderMatrix(); }
+        function renderOptionNotes() {
+            document.getElementById('optionNotes').innerHTML = `<table><caption class="sr-only">Notas por alternativa</caption><tbody>${matrixOptions.map(o => `<tr><td style="width:34%"><strong>${o.name}</strong></td><td style="font-size:13.5px">${optionNotes[o.key]}</td></tr>`).join('')}</tbody></table>`;
+        }
+
+        // ================= CORE WEB VITALS =================
+        function setStatus(id, good, mid, tGood, tMid, tBad) {
+            const el = document.getElementById(id);
+            el.textContent = good ? tGood : (mid ? tMid : tBad);
+            el.style.color = good ? '#5E7400' : (mid ? '#12130E' : '#B43C1E');
+        }
+        function updateCWVDiagnostic() {
+            const lcp = parseFloat(document.getElementById('lcpSlider').value);
+            const cls = parseFloat(document.getElementById('clsSlider').value);
+            const inp = parseInt(document.getElementById('inpSlider').value, 10);
+            document.getElementById('lcpVal').textContent = lcp.toFixed(1) + ' s';
+            document.getElementById('clsVal').textContent = cls.toFixed(2);
+            document.getElementById('inpVal').textContent = inp + ' ms';
+            setStatus('lcpStatus', lcp <= 2.5, lcp <= 4.0, '● Bueno (≤ 2,5 s)', '▲ Necesita mejora (2,5–4 s)', '✕ Pobre (> 4 s): abandono alto');
+            setStatus('clsStatus', cls <= 0.10, cls <= 0.25, '● Bueno (≤ 0,10)', '▲ Necesita mejora (0,10–0,25)', '✕ Pobre (> 0,25): página inestable');
+            setStatus('inpStatus', inp <= 200, inp <= 500, '● Bueno (≤ 200 ms)', '▲ Necesita mejora (200–500 ms)', '✕ Pobre (> 500 ms): toques sin respuesta');
+            const badge = document.getElementById('cwvOverallBadge');
+            const rem = document.getElementById('cwvRemediation');
+            if (lcp <= 2.5 && cls <= 0.10 && inp <= 200) {
+                badge.textContent = 'Estado: óptimo'; badge.className = 'cwv-estado est-bueno';
+                rem.innerHTML = 'Imágenes WebP/AVIF con <code>width</code>/<code>height</code> explícitos y <code>loading="lazy"</code> fuera de la primera pantalla · Imagen principal con <code>fetchpriority="high"</code> · Video institucional con fachada (carga al tocar reproducir) · Máximo 3–4 pesos tipográficos con <code>display=swap</code>.';
+            } else if (lcp > 4.0 || cls > 0.25 || inp > 500) {
+                badge.textContent = 'Estado: crítico'; badge.className = 'cwv-estado est-malo';
+                rem.innerHTML = '<strong style="color:var(--carbon)">Acciones urgentes:</strong> comprimir la imagen principal (≤ 150 KB en móvil), eliminar scripts bloqueantes de terceros, reemplazar iframes de Drive por un reproductor ligero y reservar espacio fijo a imágenes, banners y videos.';
+            } else {
+                badge.textContent = 'Estado: mejorable'; badge.className = 'cwv-estado est-medio';
+                rem.innerHTML = 'Diferir JavaScript no esencial (analítica, chat) · Activar caché y compresión Brotli/Gzip en Hostinger · Objetivo: 1 MB o menos por página en conexiones móviles rurales.';
+            }
+        }
+
+        // ================= SCHEMA.ORG =================
+        const schemaTemplates = {
+            org: `{
+  "@context": "https://schema.org",
+  "@type": ["EducationalOrganization", "NGO"],
+  "@id": "https://www.dominio-cic.org/#organizacion",
+  "name": "Centro de Innovación Comunitario (CIC)",
+  "description": "Centro para la autonomía económica de mujeres emprendedoras del Caribe colombiano, en red con la Red de Mujeres del Caribe.",
+  "url": "https://www.dominio-cic.org",
+  "logo": "https://www.dominio-cic.org/images/cic-logo.svg",
+  "parentOrganization": { "@type": "Organization", "name": "Red de Mujeres del Caribe" },
+  "areaServed": ["Atlántico", "Bolívar", "Sucre", "Córdoba", "Magdalena", "Cesar", "La Guajira"],
+  "sameAs": ["REEMPLAZAR_URL_FACEBOOK", "REEMPLAZAR_URL_INSTAGRAM"]
+}`,
+            course: `{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Ruta HACER: fortalece tu negocio en 6 semanas",
+  "description": "Seis semanas de acompañamiento individual (12 horas) sobre costos, precio, punto de equilibrio, comercialización y plan de inversión.",
+  "inLanguage": "es-CO",
+  "provider": { "@id": "https://www.dominio-cic.org/#organizacion" },
+  "educationalCredentialAwarded": "Constancia de participación",
+  "isAccessibleForFree": true,
+  "timeRequired": "PT12H",
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "blended",
+    "courseWorkload": "PT12H"
+  },
+  "teaches": ["Costos y precio", "Punto de equilibrio", "Plan comercial", "Plan de inversión"]
+}`,
+            recurso: `{
+  "@context": "https://schema.org",
+  "@type": ["LearningResource", "DigitalDocument"],
+  "name": "Plantilla de punto de equilibrio",
+  "description": "Plantilla para calcular cuánto debe vender un negocio para cubrir sus costos.",
+  "url": "https://www.dominio-cic.org/recursos/punto-equilibrio",
+  "learningResourceType": "Plantilla",
+  "educationalLevel": "Básico",
+  "inLanguage": "es-CO",
+  "isAccessibleForFree": true,
+  "teaches": "Calcular el punto de equilibrio",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "Emprendedora" },
+  "encodingFormat": "application/pdf",
+  "license": "REEMPLAZAR_LICENCIA (p. ej. CC BY-NC-SA 4.0)",
+  "publisher": { "@id": "https://www.dominio-cic.org/#organizacion" }
+}`,
+            breadcrumb: `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.dominio-cic.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Recursos", "item": "https://www.dominio-cic.org/recursos" },
+    { "@type": "ListItem", "position": 3, "name": "Punto de equilibrio", "item": "https://www.dominio-cic.org/recursos/punto-equilibrio" }
+  ]
+}`
+        };
+        const schemaNotes = {
+            org: '<strong>Prioridad alta.</strong> Ayuda a Google a entender al CIC como entidad y a vincularlo con la Red de Mujeres del Caribe. Va en el <code>&lt;head&gt;</code> de todas las páginas.',
+            course: '<strong>Valor semántico, sin resultado enriquecido.</strong> Google retiró en 2025 la presentación especial "Course Info". El marcado sigue siendo válido y útil para describir la ruta, pero no genera un fragmento especial.',
+            recurso: '<strong>Oportunidad SEO.</strong> Cada plantilla de la biblioteca como página propia con <code>LearningResource</code> describe con precisión qué enseña y para quién. Confirmar antes la licencia de uso.',
+            breadcrumb: '<strong>Recomendado.</strong> Refuerza la jerarquía Inicio → Recursos → Plantilla y ayuda a entender la estructura del sitio.'
+        };
+        function toggleSchemaEntity(type) {
+            document.getElementById('schemaCodeBlock').textContent = schemaTemplates[type];
+            document.getElementById('schemaNote').innerHTML = schemaNotes[type];
+            document.querySelectorAll('[data-sch]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sch === type)));
+        }
+
+        // ================= WIREFRAME =================
+        const wireframeDetails = {
+            'p-nav': { badge: 'Portal · navegación', title: 'Cuatro enlaces que hablan de aprender', desc: 'Rutas, Recursos, Sobre el CIC y Ayuda, más un botón "Ingresar" siempre visible. Lo institucional se agrupa en un solo enlace.', specs: ['<strong>Patrón:</strong> P3 y P7 (Coursera, Canvas Catalog, Moodle Docs).', '<strong>SEO:</strong> navegación semántica en <code>&lt;nav&gt;</code> con enlaces rastreables a los clústeres.', '<strong>Móvil:</strong> menú desplegable con "Ingresar" fuera del menú.'] },
+            'p-hero': { badge: 'Portal · héroe', title: 'Propuesta clara + "¿quién eres?"', desc: 'Una frase de valor y tres botones de entrada por rol que llevan a la ruta, a la guía de dinamizadora o a la página para aliados.', specs: ['<strong>Patrón:</strong> P2 entrada por rol (Docebo, Coursera for Business).', '<strong>Técnico:</strong> imagen real del territorio en WebP ≤ 150 KB con <code>fetchpriority="high"</code>.', '<strong>Medición:</strong> evento GA4 <em>seleccion_rol</em>.'] },
+            'p-rutas': { badge: 'Portal · catálogo', title: 'Catálogo de rutas de aprendizaje', desc: 'Tres tarjetas: Gestión del CIC, Ruta HACER y Ruta SER, cada una con duración, a quién va dirigida y qué se obtiene.', specs: ['<strong>Patrón:</strong> P3 catálogo → ficha (Coursera, Canvas Catalog).', '<strong>SEO:</strong> cada tarjeta enlaza a una ficha indexable en <code>/rutas/…</code>.', '<strong>Conversión:</strong> la ficha termina en "Ingresar a la ruta".'] },
+            'p-recursos': { badge: 'Portal · biblioteca', title: 'Biblioteca de recursos filtrable', desc: 'Las plantillas y guías (A1–A24) como páginas propias, filtrables por tema, con descarga en PDF y enlace a la semana de la ruta donde se usan.', specs: ['<strong>Patrón:</strong> caja de herramientas abierta (TodasConectadas).', '<strong>SEO:</strong> principal fuente de tráfico orgánico; marcado <code>LearningResource</code>.', '<strong>Legal:</strong> publicar solo lo que la Red autorice, con licencia explícita.'] },
+            'p-modelo': { badge: 'Portal · Sobre el CIC', title: 'El modelo en una franja', desc: 'Resumen de la cascada (Secretaría Técnica → satélites → emprendedoras) y acceso a /sobre-cic, donde viven Quiénes somos, Qué buscamos, El proceso y el video.', specs: ['<strong>Plan de Trabajo:</strong> conserva sus secciones institucionales, agrupadas.', '<strong>Rendimiento:</strong> video con fachada; el sitio se publica aunque el video no esté listo.'] },
+            'p-cifras': { badge: 'Portal · impacto', title: 'Cifras + mapa del territorio', desc: '200 emprendedoras, 24 dinamizadoras, 8 satélites y un mapa SVG liviano con los 13 municipios.', specs: ['<strong>SEO local:</strong> municipios en texto, no solo en la imagen.', '<strong>Mantenimiento:</strong> cifras en un solo archivo, actualizables por ciclo.'] },
+            'p-aliados': { badge: 'Portal · confianza', title: 'Franja de aliados', desc: 'Respaldo institucional visible. La lista exacta de entidades y logos debe validarse (FUCOLDE / FUPAD).', specs: ['<strong>Legal:</strong> usar logos solo con autorización y según los lineamientos de cada entidad.'] },
+            'p-pie': { badge: 'Portal · pie', title: 'Ayuda, verificación y datos', desc: 'Centro de ayuda, verificación de constancias, política de tratamiento de datos y WhatsApp de soporte.', specs: ['<strong>Patrón:</strong> P6 y P7.', '<strong>Legal:</strong> política de datos obligatoria por el manejo de cédulas (Ley 1581 de 2012).'] },
+            'c-login': { badge: 'Campus · acceso', title: 'Ingreso con cédula', desc: 'Número de cédula como usuario y recuperación asistida. Sin autorregistro: las cuentas se crean desde la base oficial.', specs: ['<strong>Referente:</strong> Zajuna (SENA) ingresa con número de documento.', '<strong>Legal:</strong> aceptación de la autorización de datos en el primer ingreso.', '<strong>Indexación:</strong> todo el campus con <code>X-Robots-Tag: noindex</code>.'] },
+            'c-continuar': { badge: 'Campus · inicio', title: 'Un saludo y un botón', desc: 'La primera pantalla muestra la siguiente actividad pendiente y un único botón "Continuar".', specs: ['<strong>Patrón:</strong> P4 (Khan Academy, tablero de Open edX, vista general de Moodle 5).', '<strong>UX:</strong> quien vuelve con poco tiempo no navega: continúa.'] },
+            'c-rutas': { badge: 'Campus · avance', title: 'Mis rutas con porcentaje', desc: 'Barras de progreso calculadas automáticamente por finalización de actividades.', specs: ['<strong>Motivación:</strong> el avance visible sostiene la continuidad.', '<strong>Gestión:</strong> la Secretaría ve el mismo dato por dinamizadora y satélite.'] },
+            'c-reproductor': { badge: 'Campus · contenido', title: 'Reproductor con temario', desc: 'Video arriba, guía y plantilla debajo, cuestionario al final; el temario se despliega desde un costado con marcas de finalización.', specs: ['<strong>Patrón:</strong> P5 (índice lateral de Moodle, vista de curso de Open edX, Coursera).', '<strong>Regla CIC:</strong> 2 intentos y mínimo 70 %; al bloquear, indica qué video repasar.', '<strong>Técnico:</strong> video con seguimiento (H5P o API de YouTube).'] },
+            'c-satelite': { badge: 'Campus · operación', title: 'Mi satélite (solo dinamizadoras)', desc: 'Registrar la sesión, subir fotos, diligenciar la lista de chequeo (A18) y la bitácora (A19).', specs: ['<strong>Datos:</strong> alimenta el reporte semanal automático.', '<strong>Sin señal:</strong> la app permite capturar y sincronizar después.'] },
+            'c-logros': { badge: 'Campus · logros', title: 'Insignias y constancia', desc: 'Insignia por módulo aprobado y constancia descargable al cumplir requisitos, con código verificable en /verificar.', specs: ['<strong>Patrón:</strong> P6 (Coursera, Open Badges).'] },
+            'c-tabbar': { badge: 'Campus · navegación', title: 'Barra inferior fija', desc: 'Cinco destinos al alcance del pulgar: Inicio, Rutas, Logros, Comunidad y Ayuda.', specs: ['<strong>Patrón:</strong> apps de Moodle, Khan Academy y Coursera.', '<strong>Accesibilidad:</strong> íconos con texto y áreas táctiles de 44–48 px.'] },
+            'g-resumen': { badge: 'Gestión · resumen', title: 'Estado del ciclo en una mirada', desc: 'Indicadores de avance del curso de dinamizadoras y de las sesiones registradas.', specs: ['<strong>Moodle:</strong> tablero con informes personalizados.', '<strong>Contrato:</strong> puede alinearse con los indicadores I1–I6 si se confirma.'] },
+            'g-registros': { badge: 'Gestión · usuarias', title: 'Carga y aprobación de registros', desc: 'Carga masiva desde la base oficial de vinculación y cola de casos pendientes.', specs: ['<strong>Seguridad:</strong> solo roles autorizados ven cédulas.', '<strong>Plan:</strong> define quién aprueba (pregunta abierta del Plan de Trabajo).'] },
+            'g-satelites': { badge: 'Gestión · territorio', title: 'Avance por satélite', desc: 'Vista comparativa de los 8 satélites con alertas de rezago semanal.', specs: ['<strong>Referente:</strong> analítica de D2L Brightspace.'] },
+            'g-reporte': { badge: 'Gestión · reportes', title: 'Reporte semanal automático', desc: 'Se genera a partir de lo registrado en el campus y llega a la Secretaría Técnica.', specs: ['<strong>Moodle:</strong> generador de informes con envío programado.', '<strong>Documento 6.4:</strong> sección 10.3, instrumentos de seguimiento.'] },
+            'g-contenidos': { badge: 'Gestión · contenidos', title: 'Preguntas y medios', desc: 'Banco de preguntas compartido y biblioteca de videos y grabaciones de sesiones.', specs: ['<strong>Patrón:</strong> capa de autoría separada, como Studio en Open edX.'] },
+            'g-crm': { badge: 'Gestión · Módulo 3', title: 'CRM por emprendimiento (fase posterior)', desc: 'Buscador por cédula o correo del emprendimiento con historial, comentarios del mentor y armado del informe semanal.', specs: ['<strong>Recomendación:</strong> desarrollo propio (Firebase) conectado al campus por API, después de la entrega de noviembre.'] }
+        };
+        let activeWf = null;
+        function inspectSection(key, el) {
+            const d = wireframeDetails[key];
+            if (!d) return;
+            document.getElementById('inspectBadge').textContent = d.badge;
+            document.getElementById('inspectTitle').textContent = d.title;
+            document.getElementById('inspectDescription').textContent = d.desc;
+            document.getElementById('inspectSpecs').innerHTML = d.specs.map(s => `<div>${s}</div>`).join('');
+            if (activeWf) activeWf.classList.remove('activo');
+            if (el) { el.classList.add('activo'); activeWf = el; }
+        }
+        function switchWireframe(view) {
+            ['portal', 'campus', 'gestion'].forEach(v => { document.getElementById('wf-' + v).hidden = v !== view; });
+            document.querySelectorAll('[data-vista]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vista === view)));
+            const first = document.querySelector('#wf-' + view + ' .wf');
+            inspectSection(first.dataset.k, first);
+        }
+
+        // ================= METADATOS =================
+        const metaPages = [
+            ['Inicio', '/', 'Centro de Innovación Comunitario | Formación para mujeres', 'Rutas de aprendizaje, plantillas y acompañamiento para la autonomía económica de mujeres emprendedoras del Caribe colombiano.'],
+            ['Rutas', '/rutas', 'Rutas de aprendizaje para emprendedoras | CIC', 'Curso de gestión del CIC, ruta HACER y ruta SER: formación práctica en finanzas, ventas, liderazgo y derechos.'],
+            ['Ruta HACER', '/rutas/hacer', 'Ruta HACER: fortalece tu negocio en 6 semanas | CIC', 'Seis semanas de acompañamiento individual para calcular costos, fijar precios, vender más y planear tu inversión.'],
+            ['Ruta SER', '/rutas/ser', 'Ruta SER: liderazgo, confianza y derechos | CIC', 'Cuatro talleres grupales para fortalecer tu confianza, tu liderazgo y conocer tus derechos y rutas de atención.'],
+            ['Gestión del CIC', '/rutas/gestion-cic', 'Curso de gestión del CIC para dinamizadoras', 'Curso virtual de 5 módulos (≈2 horas) para dinamizadoras: cómo opera el centro, el ecosistema y los pilares del CIC.'],
+            ['Recursos', '/recursos', 'Plantillas y guías para emprendedoras | CIC', 'Descarga plantillas de registro diario, costos, punto de equilibrio, plan comercial, formalización y marketing digital.'],
+            ['Recurso (ejemplo)', '/recursos/punto-equilibrio', 'Plantilla de punto de equilibrio para tu negocio', 'Calcula cuánto necesitas vender para cubrir tus costos con esta plantilla sencilla del Centro de Innovación Comunitario.'],
+            ['Sobre el CIC', '/sobre-cic', 'Qué es el Centro de Innovación Comunitario', 'Conoce el modelo del CIC: formación en cascada con la Red de Mujeres del Caribe para la autonomía económica de la mujer.'],
+            ['Territorio', '/sobre-cic/territorio', 'Satélites del CIC en 7 departamentos del Caribe', 'Mapa de los 8 satélites del CIC en Atlántico, Bolívar, Sucre, Córdoba, Magdalena, Cesar y La Guajira.'],
+            ['Aliados', '/sobre-cic/aliados', 'Aliados del Centro de Innovación Comunitario', 'Organizaciones que hacen posible el CIC junto a la Red de Mujeres del Caribe.'],
+            ['Ayuda', '/ayuda', 'Ayuda: cómo ingresar a la plataforma del CIC', 'Cómo entrar con tu cédula, recuperar tu clave, usar la app sin datos y contactar al equipo del CIC.']
+        ];
+        function renderMetaTable() {
+            document.getElementById('metaTableBody').innerHTML = metaPages.map(p => {
+                const tOk = p[2].length <= 60, dOk = p[3].length <= 155;
+                return `<tr><td><strong>${p[0]}</strong></td><td><code>${p[1]}</code></td><td>${p[2]} <span class="${tOk ? 'ok' : 'no'}" style="font-family:var(--mono);font-size:11px">${p[2].length}</span></td><td>${p[3]} <span class="${dOk ? 'ok' : 'no'}" style="font-family:var(--mono);font-size:11px">${p[3].length}</span></td></tr>`;
+            }).join('');
+        }
+
+        // ================= GRÁFICAS =================
+        function initCharts() {
+            if (typeof Chart === 'undefined') return;
+            Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+            Chart.defaults.color = '#55564E';
+            Chart.defaults.borderColor = 'rgba(18,19,14,0.1)';
+            const base = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
+
+            new Chart(document.getElementById('hoursChart'), {
+                type: 'bar',
+                data: { labels: ['Secretaría Técnica', 'Curso gestión', 'Ruta HACER', 'Ruta SER'], datasets: [{ data: [32, 2, 12, 16], backgroundColor: ['#12130E', '#8A8B80', '#D7F23A', '#12130E'], borderColor: '#12130E', borderWidth: 1.5 }] },
+                options: { ...base, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + ' horas' } } }, scales: { y: { beginAtZero: true, ticks: { callback: v => v + ' h' } }, x: { grid: { display: false } } } }
+            });
+            new Chart(document.getElementById('marketChart'), {
+                type: 'bar',
+                data: { labels: ['Moodle', 'Blackboard', 'Canvas', 'Open LMS', 'Classroom', 'Brightspace', 'Chamilo', 'e-Study', 'Otros'], datasets: [{ data: [74, 5, 5, 3, 3, 2, 2, 2, 5], backgroundColor: ['#D7F23A', '#12130E', '#12130E', '#12130E', '#12130E', '#12130E', '#12130E', '#12130E', '#8A8B80'], borderColor: '#12130E', borderWidth: 1.5 }] },
+                options: { ...base, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + ' % de instituciones' } } }, scales: { x: { beginAtZero: true, max: 80, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } } }
+            });
+            const totals = computeTotals(), max = Math.max(...totals);
+            matrixChart = new Chart(document.getElementById('matrixChart'), {
+                type: 'bar',
+                data: { labels: matrixOptions.map(o => o.name), datasets: [{ data: totals, backgroundColor: totals.map(t => t === max ? '#D7F23A' : '#12130E'), borderColor: '#12130E', borderWidth: 1.5 }] },
+                options: { ...base, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + ' / 100' } } }, scales: { y: { beginAtZero: true, max: 100 }, x: { grid: { display: false }, ticks: { font: { size: 10.5 } } } } }
+            });
+        }
+
+        // ================= RIEL E ÍNDICE ACTIVO =================
+        function toggleRail(force) {
+            const rail = document.getElementById('riel');
+            const open = typeof force === 'boolean' ? force : !rail.classList.contains('abierto');
+            rail.classList.toggle('abierto', open);
+            document.getElementById('velo').classList.toggle('visible', open);
+            document.getElementById('menuBtn').setAttribute('aria-expanded', String(open));
+        }
+        function initRailSpy() {
+            const links = [...document.querySelectorAll('.rail nav a')];
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            if (!('IntersectionObserver' in window)) return;
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        links.forEach(l => l.classList.remove('activo'));
+                        const a = map.get(e.target.id);
+                        if (a) a.classList.add('activo');
+                    }
+                });
+            }, { rootMargin: '-35% 0px -60% 0px' });
+            map.forEach((a, id) => { const s = document.getElementById(id); if (s) obs.observe(s); });
+        }
+
+        function shareThisPage() {
+            const data = { title: document.title, text: 'Benchmarking LMS y estructura web recomendada para el CIC · 2H.O', url: window.location.href };
+            if (navigator.share) navigator.share(data).catch(() => {});
+            else if (navigator.clipboard) navigator.clipboard.writeText(data.url).then(() => alert('Enlace copiado al portapapeles.'));
+            else window.prompt('Copia este enlace:', data.url);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBenchmarking('all');
+            renderMatrix();
+            renderOptionNotes();
+            renderMetaTable();
+            toggleSchemaEntity('org');
+            document.querySelectorAll('.wf').forEach(el => el.addEventListener('click', () => inspectSection(el.dataset.k, el)));
+            switchWireframe('portal');
+            updateCWVDiagnostic();
+            initRailSpy();
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleRail(false); });
+        });
+        window.addEventListener('load', initCharts);
+    </script>
+
+    <!-- FAQPage: marcado válido y opcional. Desde mayo de 2026 Google no muestra resultados enriquecidos de FAQ. -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": "¿Qué es el Centro de Innovación Comunitario (CIC)?", "acceptedAnswer": {"@type": "Answer", "text": "Es un centro para la autonomía económica de las mujeres del Caribe colombiano que funciona en red con la Red de Mujeres del Caribe: una Secretaría Técnica, 8 satélites territoriales y 24 dinamizadoras acompañan a emprendedoras en su negocio y en su desarrollo personal."}},
+            {"@type": "Question", "name": "¿Quién puede ingresar a la plataforma de formación?", "acceptedAnswer": {"@type": "Answer", "text": "Las emprendedoras, dinamizadoras y secretarias vinculadas al proyecto. El acceso se habilita con el número de cédula, verificado contra la base oficial de vinculación."}},
+            {"@type": "Question", "name": "¿Puedo estudiar desde el celular y sin datos?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. La plataforma está pensada para el celular, con videos cortos y materiales descargables, y la app permite descargar contenidos con Wi-Fi para verlos luego. El proyecto contempla paquetes de datos para facilitar el acceso."}},
+            {"@type": "Question", "name": "¿Qué recibo al terminar?", "acceptedAnswer": {"@type": "Answer", "text": "Una constancia de participación expedida por la plataforma. Las dinamizadoras deben aprobar los 5 módulos del curso de gestión con al menos 70 %; las emprendedoras deben completar las 6 semanas de la ruta HACER, al menos 3 de los 4 talleres SER y su portafolio de evidencias."}},
+            {"@type": "Question", "name": "¿En qué municipios está presente el CIC?", "acceptedAnswer": {"@type": "Answer", "text": "En 13 municipios de 7 departamentos: Baranoa y Campo de la Cruz (Atlántico), Cartagena y María la Baja (Bolívar), Sincelejo y Tolú (Sucre), Montería y Tierra Alta (Córdoba), Santa Marta (Magdalena), Valledupar y Pueblo Bello (Cesar), y Riohacha y Albania (La Guajira)."}},
+            {"@type": "Question", "name": "¿Qué aprenden las emprendedoras en la ruta HACER-SER?", "acceptedAnswer": {"@type": "Answer", "text": "Costos y finanzas básicas, comercialización, administración y planeación (ruta HACER, 6 semanas de acompañamiento individual), y habilidades socioemocionales, liderazgo y derechos (ruta SER, 4 talleres grupales). En total son 28 horas de formación directa."}}
+        ]
+    }
+    </script>
+</body>
+</html>

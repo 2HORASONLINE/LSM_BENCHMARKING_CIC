@@ -1,0 +1,20 @@
+# Centro de Innovación Comunitario (CIC)
+
+> Formación y acompañamiento para la autonomía económica de mujeres emprendedoras del Caribe colombiano, en red con la Red de Mujeres del Caribe: Secretaría Técnica, 8 satélites en 7 departamentos y 24 dinamizadoras que acompañan a 200 emprendedoras.
+
+## Rutas de aprendizaje
+- [Ruta HACER](https://www.dominio-cic.org/rutas/hacer): 6 semanas de acompañamiento individual (costos, precio, ventas, plan de inversión).
+- [Ruta SER](https://www.dominio-cic.org/rutas/ser): 4 talleres de liderazgo, confianza y derechos.
+- [Gestión del CIC](https://www.dominio-cic.org/rutas/gestion-cic): curso de 5 módulos para dinamizadoras.
+
+## Recursos
+- [Biblioteca de plantillas](https://www.dominio-cic.org/recursos): registro diario, costos, punto de equilibrio, plan comercial, formalización.
+
+## Institucional y ayuda
+- [Sobre el CIC](https://www.dominio-cic.org/sobre-cic)
+- [Territorio](https://www.dominio-cic.org/sobre-cic/territorio)
+- [Ayuda](https://www.dominio-cic.org/ayuda)
+
+## Notas
+- El campus de formación es privado y no debe indexarse.
+- Archivo opcional: Google Search no lo usa; algunos agentes de IA sí lo consultan.
